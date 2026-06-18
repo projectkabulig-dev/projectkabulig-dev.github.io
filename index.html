@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project KABULIG - Romblon</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--navy:#0B1F4B;--navy-light:#162B5E;--navy-dark:#071430;--gold:#D4A017;--gold-light:#F0C040;--gold-pale:#FDF3D0;--white:#FFFFFF;--text-muted:#6B7AA0;--bg-light:#F5F7FF;--card-border:#E0E8FF}
+body{font-family:'Nunito',sans-serif;background:var(--bg-light);color:var(--navy);overflow-x:hidden}
+nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-badge{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--navy-dark)}
+.nav-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:var(--white)}
+.nav-title em{color:var(--gold-light);font-style:normal}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:13px;font-weight:600;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold-light)}
+.hero{background:var(--navy);padding:5rem 2rem 4rem;text-align:center}
+.hero-tag{display:inline-block;background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.4);color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:1.5rem}
+.hero h1{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,4vw,2.8rem);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:1rem}
+.hero h1 span{color:var(--gold-light)}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto 2rem;line-height:1.7}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--white);font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.3);cursor:pointer;transition:border-color 0.2s,color 0.2s,transform 0.15s}
+.btn-outline:hover{border-color:var(--gold-light);color:var(--gold-light);transform:translateY(-2px)}
+.stats{background:var(--navy-dark);padding:1.5rem 2rem;display:flex;justify-content:center;flex-wrap:wrap}
+.stat{text-align:center;padding:0.75rem 2.5rem;border-right:1px solid rgba(255,255,255,0.1)}
+.stat:last-child{border-right:none}
+.stat .num{font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:var(--gold-light)}
+.stat .lbl{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+.section-title{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--navy);margin-bottom:0.75rem}
+.section-sub{font-size:1rem;color:var(--text-muted);line-height:1.6;margin-bottom:2rem}
+.about{background:var(--white);padding:4rem 2rem}
+.about-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-text p{font-size:0.98rem;color:#4A5578;line-height:1.75;margin-bottom:1rem}
+.pillars{display:flex;flex-direction:column;gap:12px}
+.pillar{background:var(--gold-pale);border-left:4px solid var(--gold);padding:12px 16px;border-radius:0 8px 8px 0;transition:transform 0.2s}
+.pillar:hover{transform:translateX(4px)}
+.pillar strong{font-size:13px;font-weight:800;color:var(--navy);display:block}
+.pillar span{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+.tools{background:var(--bg-light);padding:4rem 2rem}
+.tools-inner{max-width:1100px;margin:0 auto}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.tool-card{background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.5rem;cursor:default;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;display:flex;flex-direction:column}
+.tool-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(11,31,75,0.12);border-color:var(--gold)}
+.tool-icon{font-size:28px;margin-bottom:1rem;transition:transform 0.2s;display:inline-block}
+.tool-card:hover .tool-icon{transform:scale(1.2)}
+.tool-card h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.tool-card p{font-size:13px;color:var(--text-muted);line-height:1.6;flex:1}
+.tag{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.tag-live{background:#E6F9F0;color:#1B7A4A}
+.tag-dev{background:#FFF3CD;color:#8A6200}
+.tool-btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.tool-btn{display:inline-block;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;padding:7px 14px;border-radius:7px;text-decoration:none;transition:background 0.2s,transform 0.15s}
+.tool-btn-navy{background:var(--navy);color:var(--white)}
+.tool-btn-navy:hover{background:var(--navy-light);transform:translateY(-1px)}
+.tool-btn-gold{background:var(--gold);color:var(--navy-dark)}
+.tool-btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.assessment{background:var(--white);padding:4rem 2rem}
+.assessment-inner{max-width:1100px;margin:0 auto}
+.assess-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:2rem}
+.assess-card{background:var(--navy);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
+.assess-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(11,31,75,0.25)}
+.assess-icon{font-size:32px;margin-bottom:1rem;display:inline-block;transition:transform 0.2s}
+.assess-card:hover .assess-icon{transform:scale(1.2)}
+.assess-card h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px}
+.assess-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;flex:1;margin-bottom:1rem}
+.assess-btn{display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;align-self:flex-start}
+.assess-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
+.memos{background:var(--gold-pale);padding:4rem 2rem}
+.memos-inner{max-width:1100px;margin:0 auto}
+.memos-card{background:var(--white);border:2px solid var(--gold);border-radius:16px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-top:2rem;transition:transform 0.2s,box-shadow 0.2s}
+.memos-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(212,160,23,0.2)}
+.memos-left{display:flex;align-items:center;gap:1.25rem}
+.memos-icon{font-size:40px}
+.memos-text h3{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.memos-text p{font-size:13px;color:var(--text-muted);line-height:1.6;max-width:480px}
+.memos-btn{display:inline-block;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;white-space:nowrap;flex-shrink:0}
+.memos-btn:hover{background:var(--navy-light);transform:translateY(-2px)}
+.team{background:var(--white);padding:4rem 2rem}
+.team-inner{max-width:900px;margin:0 auto}
+.team-card{background:var(--navy);border-radius:16px;padding:2rem;display:flex;align-items:center;gap:2rem;margin-top:2rem;flex-wrap:wrap;transition:transform 0.2s}
+.team-card:hover{transform:translateY(-4px)}
+.avatar{width:80px;height:80px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--navy-dark);flex-shrink:0}
+.team-info h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.2rem;color:var(--white)}
+.team-info .role{font-size:12px;font-weight:600;color:var(--gold-light);margin:4px 0 10px;text-transform:uppercase;letter-spacing:0.5px}
+.team-info p{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.65}
+footer{background:var(--navy-dark);padding:2rem;text-align:center}
+footer p{font-size:12px;color:rgba(255,255,255,0.4)}
+footer strong{color:var(--gold-light)}
+@media(max-width:680px){.about-inner{grid-template-columns:1fr}.nav-links{display:none}.team-card{flex-direction:column;text-align:center}.hero h1{font-size:2rem}.memos-card{flex-direction:column}.memos-btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-badge">KBG</div>
+    <span class="nav-title">Project <em>KABULIG</em></span>
+  </div>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#blog">Blog</a>
+    <a href="#tools">Tools</a>
+    <a href="#aral-grade1">ARAL Grade 1</a>
+    <a href="#assessment">Assessment</a>
+    <a href="#online-assessment">Online Exam</a>
+    <a href="#memos">Memos</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-tag">Romblon - CID Mathematics</div>
+  <div style="font-family:'Outfit',sans-serif;font-size:clamp(1rem,3vw,1.2rem);font-weight:700;color:rgba(255,255,255,0.45);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.3rem">Project</div>
+  <div style="font-family:'Outfit',sans-serif;font-size:clamp(3.5rem,10vw,7rem);font-weight:900;color:var(--gold-light);line-height:1;margin-bottom:1.25rem;letter-spacing:3px">KABULIG</div>
+  <h1>Empowering Learners,<br>Teachers, <span>&amp; School Heads</span></h1>
+  <p>Project KABULIG is a suite of AI-assisted instructional tools, dashboards, and programs designed to elevate mathematics education across the 13 island districts of Romblon.</p>
+  <div class="hero-btns">
+    <button class="btn-gold">Explore Tools</button>
+    <button class="btn-outline">Learn More</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="num">13</div><div class="lbl">Island Districts</div></div>
+  <div class="stat"><div class="num">16+</div><div class="lbl">Digital Tools</div></div>
+  <div class="stat"><div class="num">K-12</div><div class="lbl">Grade Coverage</div></div>
+  <div class="stat"><div class="num">2026</div><div class="lbl">Active SY</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <div class="section-label">About the Project</div>
+      <div class="section-title">What is Project KABULIG?</div>
+      <p><strong>KABULIG</strong> is a Filipino word meaning <em>"katulong"</em> — an assistant, a helper, a companion in work. In the context of education, it captures the role of AI not as a replacement for teachers, but as a <strong>trusted partner</strong> that supports them in doing their work better.</p>
+      <p>Its full title is <strong>Project KABULIG: Maximizing the Use of AI in the School</strong> — a division-level initiative developed under the Curriculum Implementation Division, Romblon, that equips teachers, school heads, and learners with AI-assisted tools for lesson planning, numeracy assessment, and intervention programs.</p>
+      <p>All outputs are <strong>AI-Assisted, not AI-Generated</strong> - validated by educators and fully aligned with DepEd standards. The teacher remains in control. KABULIG simply helps.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><strong>Assessment</strong><span>RMA, DUNT, SHS LNA, JHS Numeracy dashboards</span></div>
+      <div class="pillar"><strong>Instruction</strong><span>Interactive HTML math apps for Grades 1-11</span></div>
+      <div class="pillar"><strong>Intervention</strong><span>ARAL Program, BBB, SNED/KABULIG IEPs and ALPs</span></div>
+      <div class="pillar"><strong>School Support</strong><span>LAC plans, CO reports, PD programs, ISP generators</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section style="background:var(--bg-light);padding:4rem 2rem" id="blog">
+  <div style="max-width:900px;margin:0 auto">
+    <div class="section-label">News & Updates</div>
+    <div class="section-title">KABULIG Blog</div>
+    <div class="section-sub">Insights, updates, and reflections from the Project KABULIG team.</div>
+    <article style="background:var(--white);border:1.5px solid var(--card-border);border-radius:16px;overflow:hidden;margin-top:2rem;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 8px 24px rgba(11,31,75,0.1)'" onmouseout="this.style.boxShadow=''">
+      <div style="background:var(--navy);padding:2rem 2rem 1.5rem">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+          <span style="background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:1px;text-transform:uppercase">AI in Education</span>
+          <span style="color:rgba(255,255,255,0.4);font-size:12px">June 2026</span>
+        </div>
+        <h2 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;color:var(--white);line-height:1.3;margin-bottom:0.5rem">AI-Assisted vs. AI-Generated: Ano ang Pagkakaiba at Bakit Mahalaga Ito?</h2>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5)">By Rogelio B. Candido Jr., EPS I - Mathematics</p>
+      </div>
+      <div style="padding:2rem;font-size:0.97rem;color:#4A5578;line-height:1.85">
+        <p style="margin-bottom:1.25rem">Sa panahon ngayon, maraming guro ang nagsisimula nang gumamit ng AI para sa kanilang mga gawain. Ngunit may isang tanong na madalas na lumabas: <strong style="color:var(--navy)">"Ito ba ay AI-generated o AI-assisted?"</strong></p>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin:1.5rem 0 0.75rem">Ang AI-Generated: Ang Makina ang Nagdesisyon</h3>
+        <p style="margin-bottom:1.25rem">Ang <strong>AI-Generated</strong> ay nangyayari kapag ang guro ay nagta-type ng simpleng utos at tinatanggap ang output nang walang pagbabago. Ang AI ang nagdesisyon ng lahat. Ang guro ay naging <strong>passive recipient</strong>. Ito ang eksaktong ipinagbabawal ng <strong>DepEd Order No. 016, s. 2026.</strong></p>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin:1.5rem 0 0.75rem">Ang AI-Assisted: Ang Guro ang Nagdesisyon</h3>
+        <p style="margin-bottom:1.25rem">Ang <strong>AI-Assisted</strong> ay ibang kwento. Dito, ang guro ang nagbibigay ng lahat ng propesyonal na input. Ang AI ay <strong>kasangkapan lang</strong>. Katulad ng calculator — ikaw pa rin ang nag-isip, ang calculator ay tumulong lang na mabilis ang computation.</p>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin:1.5rem 0 0.75rem">Paano Ito Ginagawa ng Project KABULIG</h3>
+        <p style="margin-bottom:1.25rem">Sa Project KABULIG, ang bawat Master Prompt ay dinisenyo para ang <strong>guro ang laging nasa sentro ng proseso.</strong> At pagkatapos mag-generate — <strong>kailangan pa ring i-review at i-validate ng guro</strong> ang bawat bahagi bago isumite.</p>
+        <div style="background:var(--gold-pale);border-left:4px solid var(--gold);padding:1rem 1.25rem;border-radius:0 8px 8px 0;margin:1.5rem 0">
+          <p style="font-size:0.95rem;color:var(--navy);font-weight:700;margin-bottom:4px">"Ang KABULIG ay hindi nagpapalit sa guro.</p>
+          <p style="font-size:0.95rem;color:#4A5578">Ito ay katulong — isang matalinong kasama sa gawain na tumutulong sa guro na magawa ang kanyang trabaho nang mas mabilis, nang mas maayos, nang may mas maraming panahon para sa mga bata."</p>
+        </div>
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--card-border);display:flex;align-items:center;gap:12px">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;color:var(--gold);flex-shrink:0">RBC</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--navy)">Rogelio B. Candido Jr.</div>
+            <div style="font-size:12px;color:var(--text-muted)">EPS I - Mathematics | Developer, Project KABULIG</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- KABULIG DIGITAL SUITE -->
+<section class="tools" id="tools">
+  <div class="tools-inner">
+    <div class="section-label">Featured Tools</div>
+    <div class="section-title">KABULIG Digital Suite</div>
+    <div class="section-sub">Browser-based tools - no installation needed. Works on any device.</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🔢</div>
+        <h3>Bawat Bata Bumibilang (BBB)</h3>
+        <p>16-session numeracy intervention app for Grade 1-3 struggling learners under the ARAL Program.</p>
+        <span class="tag tag-dev">In Development</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📖</div>
+        <h3>Reading App</h3>
+        <p>Interactive read-aloud tool supporting literacy integration in mathematics classrooms. Available in two versions.</p>
+        <span class="tag tag-live">Live</span>
+        <div class="tool-btns">
+          <a href="https://tinyurl.com/ReadingAppv1" class="tool-btn tool-btn-navy">Version 1</a>
+          <a href="https://tinyurl.com/ReadingAppv2" class="tool-btn tool-btn-gold">Version 2</a>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🛒</div>
+        <h3>Tindahan ni Lola</h3>
+        <p>Virtual store math game teaching money concepts and basic operations in a Filipino context.</p>
+        <span class="tag tag-live">Live</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🧮</div>
+        <h3>Algebra Tiles Lab</h3>
+        <p>Digital manipulatives for algebra - visualizing equations and polynomial operations.</p>
+        <span class="tag tag-live">Live</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📐</div>
+        <h3>FractionLab</h3>
+        <p>Interactive fraction model builder for elementary and junior high school learners.</p>
+        <span class="tag tag-live">Live</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BASA APP SECTION -->
+<section style="background:var(--white);padding:4rem 2rem" id="basa-app">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Literacy Tool</div>
+    <div class="section-title">BASA App</div>
+    <div class="section-sub">Interactive reading tool designed to support literacy development alongside numeracy instruction.</div>
+
+    <div style="background:var(--navy);border-radius:16px;padding:2.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem">
+      <div style="flex:1;min-width:240px">
+        <div style="font-size:2.8rem;margin-bottom:1rem">📖</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.3rem;color:var(--gold);margin-bottom:0.5rem">BASA App v1</div>
+        <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7;margin-bottom:1.5rem">
+          An interactive read-aloud tool that supports literacy integration in mathematics classrooms. 
+          Designed to help learners develop reading comprehension skills through engaging, 
+          subject-aligned content. Perfect for <strong style="color:var(--white)">ARAL time</strong> and 
+          <strong style="color:var(--white)">independent reading activities</strong>.
+        </p>
+        <a href="https://tinyurl.com/BASAAppv1" target="_blank"
+          style="display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 28px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s"
+          onmouseover="this.style.background='var(--gold-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='var(--gold)';this.style.transform=''">
+          🚀 Open BASA App ↗
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:200px">
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">🎯</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Target Learners</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Grades 1-3 &amp; Struggling Readers</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">📖</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Subject Integration</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Literacy + Mathematics</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">🗣️</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Feature</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Read-Aloud &amp; Comprehension</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">✅</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Status</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Live &amp; Available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTAL MATH SECTION -->
+<section style="background:var(--bg-light);padding:4rem 2rem" id="mental-math">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Numeracy Tool</div>
+    <div class="section-title">Mental Math</div>
+    <div class="section-sub">Interactive mental math practice game designed to build quick addition and subtraction skills, with voice-input support.</div>
+
+    <div style="background:var(--navy);border-radius:16px;padding:2.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem">
+      <div style="flex:1;min-width:240px">
+        <div style="font-size:2.8rem;margin-bottom:1rem">🧮</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.3rem;color:var(--gold);margin-bottom:0.5rem">Mental Math v1</div>
+        <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7;margin-bottom:1.5rem">
+          A gamified mental math app that builds learners' speed and confidence in addition and subtraction.
+          Features progressive difficulty levels, voice-input answers, confetti celebrations, and instant
+          feedback. Perfect for <strong style="color:var(--white)">ARAL time</strong> and
+          <strong style="color:var(--white)">independent numeracy practice</strong>.
+        </p>
+        <a href="https://tinyurl.com/MentalMathv1" target="_blank"
+          style="display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 28px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s"
+          onmouseover="this.style.background='var(--gold-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='var(--gold)';this.style.transform=''">
+          🚀 Open Mental Math ↗
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:200px">
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">🎯</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Target Learners</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Grade 1 Learners</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">🔢</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Subject Focus</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Addition &amp; Subtraction</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">🎤</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Feature</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Voice Input &amp; Progressive Levels</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">✅</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Status</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Live &amp; Available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARAL GRADE 1 SECTION -->
+<section style="background:var(--white);padding:4rem 2rem" id="aral-grade1">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Intervention Program</div>
+    <div class="section-title">ARAL Grade 1 Materials</div>
+    <div class="section-sub">Mathematics intervention materials for Grade 1 learners — structured by levels for use during ARAL time.</div>
+
+    <div style="background:var(--navy);border-radius:16px;padding:2.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem">
+      <div style="flex:1;min-width:240px">
+        <div style="font-size:2.5rem;margin-bottom:1rem">📚</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.3rem;color:var(--gold);margin-bottom:0.5rem">ARAL Materials v1</div>
+        <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7;margin-bottom:1.5rem">
+          A complete set of Grade 1 mathematics materials designed specifically for the <strong style="color:var(--white)">ARAL (Addressing Reading and Arithmetic Levels)</strong> program.
+          Covers <strong style="color:var(--white)">Levels 1 to 10</strong>, providing teachers with ready-to-use structured activities
+          to guide learners through progressive numeracy skills during dedicated ARAL time.
+        </p>
+        <a href="https://tinyurl.com/ARALmaterialsv1" target="_blank"
+          style="display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 28px;border-radius:8px;text-decoration:none;transition:background 0.2s">
+          Open ARAL Materials ↗
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;min-width:200px">
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">🎯</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Target Learners</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Grade 1 — ARAL Program</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">📊</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Coverage</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Level 1 to Level 10</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">📐</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Subject</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Mathematics</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;align-items:center;gap:12px">
+          <span style="font-size:1.4rem">✅</span>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold)">Status</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">Live &amp; Available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATHEMATICS ASSESSMENT -->
+<section class="assessment" id="assessment">
+  <div class="assessment-inner">
+    <div class="section-label">Assessment Tools</div>
+    <div class="section-title">Mathematics Assessment</div>
+    <div class="section-sub">Division-level and nationwide assessment tools to track learner numeracy performance across all key stages.</div>
+    <div class="assess-grid">
+      <div class="assess-card">
+        <div class="assess-icon">📊</div>
+        <h3>Rapid Mathematics Assessment (RMA)</h3>
+        <p>A <strong>DepEd Central Office nationwide</strong> numeracy assessment tool covering Key Stages 1, 2, and 3. Designed to measure learner performance and guide targeted intervention across all schools in the Philippines.</p>
+        <a href="https://tinyurl.com/4e83yv6j" class="assess-btn">Open RMA Tool</a>
+      </div>
+      <div class="assess-card">
+        <div class="assess-icon">🏝️</div>
+        <h3>Division Unified Numeracy Test (DUNT)</h3>
+        <p>Romblon's division-wide numeracy assessment system powered by <strong>Isla Numerika</strong> - a gamified platform with Google Sheets backend for real-time monitoring across 13 island districts.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+          <a href="https://tinyurl.com/ROMBLONJHS" class="assess-btn">JHS Numeracy</a>
+          <a href="https://tinyurl.com/DUNTK2ONLY" class="assess-btn" style="background:var(--gold-light);color:var(--navy-dark)">DUNT K-2</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KABULIG ONLINE ASSESSMENT -->
+<section id="online-assessment" style="background:var(--bg-light);padding:4rem 2rem">
+  <div style="max-width:1100px;margin:0 auto">
+
+    <div class="section-label">Online Assessment</div>
+    <div class="section-title">KABULIG Assessment Tool</div>
+    <div class="section-sub">Gumawa ng sariling online summative test o quarterly examination sa loob ng ilang minuto. Para sa mga Math teacher ng SDO Romblon.</div>
+
+    <!-- Feature highlights -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:2.5rem">
+
+      <div style="background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.25rem;display:flex;gap:14px;align-items:flex-start;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(11,31,75,0.1)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--card-border)'">
+        <div style="font-size:1.8rem;flex-shrink:0">📝</div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:4px">4 Item Types</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Multiple Choice, True/False, Identification, at Matching Type — kaya ng lahat.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.25rem;display:flex;gap:14px;align-items:flex-start;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(11,31,75,0.1)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--card-border)'">
+        <div style="font-size:1.8rem;flex-shrink:0">📥</div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:4px">Smart Import</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.6">I-paste o i-attach ang iyong Word document. Awtomatikong mababasa at mao-organize ang mga items.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.25rem;display:flex;gap:14px;align-items:flex-start;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(11,31,75,0.1)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--card-border)'">
+        <div style="font-size:1.8rem;flex-shrink:0">📊</div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:4px">Auto MPS & Analysis</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Awtomatikong nage-generate ng MPS, item analysis, at written performance analysis sa inyong Google Sheet.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.25rem;display:flex;gap:14px;align-items:flex-start;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(11,31,75,0.1)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--card-border)'">
+        <div style="font-size:1.8rem;flex-shrink:0">🔒</div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:4px">Pribadong Data</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Ang mga resulta ay nase-save sa inyong sariling Google Drive — hindi sa iba. Kayo ang may kontrol.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main download + setup cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <!-- Download Card -->
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:48px;height:48px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">📄</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white)">KABULIG Assessment Tool</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:2px">HTML File · Works offline · I-open sa browser</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7">
+          Isang HTML file lang ang kailangan. I-double-click, bubukas sa browser — may built-in Encoder, Smart Import, at student assessment player.
+        </p>
+        <ul style="font-size:12px;color:rgba(255,255,255,0.5);padding-left:1.2rem;line-height:2;margin-bottom:0.5rem">
+          <li>Para sa Math teachers ng SDO Romblon</li>
+          <li>Gumagana sa kahit anong browser</li>
+          <li>Walang internet needed para i-encode</li>
+          <li>Students pwedeng gumamit ng phone, tablet, o laptop</li>
+        </ul>
+        <a href="KABULIG_Assessment_v3.html" download
+          style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;align-self:flex-start"
+          onmouseover="this.style.background='var(--gold-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='var(--gold)';this.style.transform=''">
+          ⬇️ I-download ang Assessment Tool
+        </a>
+      </div>
+
+      <!-- Setup Card -->
+      <div style="background:var(--white);border:1.5px solid var(--card-border);border-radius:16px;padding:2rem">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--card-border)">
+          ⚙️ Paano Gamitin — 3 Steps
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:14px">
+
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="min-width:32px;height:32px;background:var(--navy);color:var(--gold-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;flex-shrink:0">1</div>
+            <div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--navy);margin-bottom:3px">I-download at i-setup ang Google Sheet</div>
+              <div style="font-size:12px;color:var(--text-muted);line-height:1.6">I-click ang "Get Your Assessment Sheet" para makuha ang iyong sariling kopya — sa iyong Drive, hindi sa iba.</div>
+              <a href="https://docs.google.com/spreadsheets/d/TEMPLATE_ID/copy" target="_blank"
+                style="display:inline-block;margin-top:8px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;background:var(--bg-light);color:var(--navy);border:1.5px solid var(--card-border);padding:6px 14px;border-radius:6px;text-decoration:none"
+                onmouseover="this.style.borderColor='var(--gold)';this.style.background='var(--gold-pale)'"
+                onmouseout="this.style.borderColor='var(--card-border)';this.style.background='var(--bg-light)'">
+                📊 Get Your Assessment Sheet →
+              </a>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="min-width:32px;height:32px;background:var(--navy);color:var(--gold-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;flex-shrink:0">2</div>
+            <div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--navy);margin-bottom:3px">I-deploy ang Apps Script</div>
+              <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Sa iyong Sheet: <strong>Extensions → Apps Script → Deploy → Web App.</strong> Kopyahin ang Web App URL.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="min-width:32px;height:32px;background:var(--navy);color:var(--gold-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;flex-shrink:0">3</div>
+            <div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--navy);margin-bottom:3px">I-open ang HTML, i-paste ang URL, gumawa ng test</div>
+              <div style="font-size:12px;color:var(--text-muted);line-height:1.6">I-double-click ang downloaded file → Settings tab → i-paste ang URL → Encoder tab → gumawa ng test → i-share ang link sa students.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Format hint -->
+        <div style="margin-top:1.25rem;padding:12px 14px;background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;font-size:11.5px;color:#78450a;line-height:1.8">
+          <strong style="display:block;margin-bottom:3px">📌 Smart Import Format:</strong>
+          <code style="font-family:monospace;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">1.</code> MC &nbsp;·&nbsp;
+          <code style="font-family:monospace;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">TF:</code> True/False &nbsp;·&nbsp;
+          <code style="font-family:monospace;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">ID:</code> Identification &nbsp;·&nbsp;
+          <code style="font-family:monospace;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">Match:</code> Matching<br>
+          Lagyan ng <code style="font-family:monospace;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">*</code> ang tamang sagot sa MC. Halimbawa: <code style="font-family:monospace;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">b) 12 *</code>
+        </div>
+
+      </div>
+    </div><!-- /grid -->
+
+  </div>
+</section>
+
+<!-- MASTER PROMPTS -->
+<section class="assessment" style="background:var(--navy);padding:4rem 2rem">
+  <div class="assessment-inner">
+    <div class="section-label" style="color:var(--gold-light)">AI-Assisted Tools</div>
+    <div class="section-title" style="color:var(--white)">KABULIG Master Prompts</div>
+    <div class="section-sub" style="color:rgba(255,255,255,0.6)">Copy-paste ready AI prompts for teachers and school heads - validated, DepEd-aligned, and designed for the Philippine classroom context.</div>
+    <div class="assess-grid">
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">👁️</div><h3>Classroom Observation Tool (COT)</h3><p>AI-assisted narrative generator for classroom observation reports. Aligned to PPST career stages - BTP, Proficient, Highly Proficient, and Distinguished.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">KABULIG v7f</span></div>
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">📝</div><h3>Lesson Plan Generator</h3><p>Generates DepEd-compliant lesson plans aligned to the 2026 MATATAG curriculum with ESRU cycle, IDF tagging, FA phases, and Pedagogy Cards.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">v3.5c</span></div>
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">🤝</div><h3>LAC Plan &amp; Session Generator</h3><p>AI-assisted generator for Learning Action Cell plans and session narratives. LAC Plan v3.1 and Session Generator v1.1 with pipeline connection.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">v3.1 / v1.1</span></div>
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">♿</div><h3>IEP / ALP Generator (SNED)</h3><p>4-stage AI-assisted IEP and ALP generation for 8 DepEd SNED disability categories, aligned to the WHO ICF framework.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">v7.6</span></div>
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">🎯</div><h3>Performance Task Generator</h3><p>Generates DepEd-aligned performance tasks with rubrics and criteria. Audited for DepEd Order 003 s.2026 AI Declaration compliance.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">v3.2</span></div>
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">✅</div><h3>MC Test Generator</h3><p>Multiple choice test generator with distractors, answer keys, and item analysis. Aligned to DepEd content standards and learning competencies.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">Master Prompt A v3.2</span></div>
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">📊</div><h3>PowerPoint Master Prompt</h3><p>AI-assisted generator for structured, DepEd-aligned PowerPoint presentations for classroom instruction and training events.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">KABULIG PPT</span></div>
+      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3)"><div class="assess-icon">📋</div><h3>WAP Generator</h3><p>Weekly Action Plan generator aligned to DepEd reporting requirements - structured, time-bound, and output-focused.</p><span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">KABULIG WAP</span></div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:13px;color:rgba(255,255,255,0.4)">All master prompts are AI-Assisted, not AI-Generated. Compliant with DepEd Order No. 016, s. 2026 and DepEd Order 003, s. 2026.</p>
+  </div>
+</section>
+
+<!-- LEARNING RESOURCES -->
+<section style="background:var(--bg-light);padding:4rem 2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Learning Resources</div>
+    <div class="section-title">Division Learning Resource Management System</div>
+    <div class="section-sub">Access curated learning resources, lesson exemplars, and instructional materials from Romblon's Curriculum Implementation Division.</div>
+    <div style="margin-top:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+      <div style="background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.12)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--card-border)'">
+        <div style="font-size:32px;margin-bottom:1rem">📚</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px">Division LRMS</h3>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.6;flex:1">Browse and access division-curated learning resources, PowerPoint lessons, and instructional materials aligned to DepEd curriculum standards.</p>
+        <div style="margin-top:14px">
+          <a href="https://bit.ly/LRPRTal" style="display:inline-block;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none" onmouseover="this.style.background='var(--navy-light)'" onmouseout="this.style.background='var(--navy)'">Open LRMS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMOS -->
+<section class="memos" id="memos">
+  <div class="memos-inner">
+    <div class="section-label">Resources</div>
+    <div class="section-title">Division Memoranda</div>
+    <div class="section-sub">Access official issuances, memoranda, and circulars from Romblon.</div>
+    <div class="memos-card">
+      <div class="memos-left">
+        <div class="memos-icon">📋</div>
+        <div class="memos-text">
+          <h3>Romblon Division Memoranda</h3>
+          <p>Browse and download official Division Memoranda from Romblon. Includes DepEd orders, policy issuances, and program guidelines relevant to all schools in the division.</p>
+        </div>
+      </div>
+      <a href="https://depedsdoromblon.com/index.php/division-memoranda/" class="memos-btn">View All Memoranda</a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="about">
+  <div class="team-inner">
+    <div class="section-label">Project Lead</div>
+    <div class="section-title">Meet the Developer</div>
+    <div class="team-card">
+      <div class="avatar">RBC</div>
+      <div class="team-info">
+        <h3>Rogelio B. Candido Jr.</h3>
+        <div class="role">Education Program Supervisor I - Mathematics</div>
+        <p>Curriculum Implementation Division, Romblon. Developer of Project KABULIG - AI-assisted tools for mathematics education and alternative delivery programs across 13 island districts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>2026 <strong>Project KABULIG</strong> - Romblon - Curriculum Implementation Division</p>
+  <p style="margin-top:6px">Developed by <strong>Sir Dyon</strong> - AI-Assisted, Not AI-Generated - Aligned with DepEd Standards</p>
+</footer>
+
+</body>
+</html>
