@@ -644,5 +644,42 @@ footer strong{color:var(--gold-light)}
   <p style="margin-top:6px">Developed by <strong>Sir Dyon</strong> - AI-Assisted, Not AI-Generated - Aligned with DepEd Standards</p>
 </footer>
 
+<script>
+/* ============================================================
+   VISITOR LOG — simple, automatic, walang form/login na kailangan
+   Tuwing magbukas ng site, minsanang nag-log sa Google Sheets.
+============================================================ */
+(function(){
+  var VISITOR_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz33npxYIXDq2JA7_GBhT5Vp6VfS4wsig7xeSjdNv3oXzEAPXKeQqLezoxPSZJIKhiU_A/exec";
+  if(!VISITOR_SCRIPT_URL || VISITOR_SCRIPT_URL.indexOf("PASTE_YOUR")===0) return;
+
+  function getDevice(){
+    return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
+  }
+  function getBrowser(){
+    var ua = navigator.userAgent;
+    if(ua.indexOf("Edg")>-1) return "Edge";
+    if(ua.indexOf("Chrome")>-1) return "Chrome";
+    if(ua.indexOf("Safari")>-1) return "Safari";
+    if(ua.indexOf("Firefox")>-1) return "Firefox";
+    return "Other";
+  }
+
+  var payload = {
+    timestamp: new Date().toISOString(),
+    page: window.location.hash || "/",
+    referrer: document.referrer || "Direct",
+    device: getDevice(),
+    browser: getBrowser()
+  };
+
+  fetch(VISITOR_SCRIPT_URL, {
+    method: "POST",
+    headers: {"Content-Type":"text/plain;charset=utf-8"},
+    body: JSON.stringify(payload)
+  }).catch(function(){ /* tahimik na fail kung walang internet */ });
+})();
+</script>
+
 </body>
 </html>
