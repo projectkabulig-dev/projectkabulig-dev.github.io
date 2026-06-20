@@ -63,6 +63,16 @@ nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justif
 .tool-btn-gold{background:var(--gold);color:var(--navy-dark)}
 .tool-btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
 .assessment{background:var(--white);padding:4rem 2rem}
+.mathstory-section{background:var(--bg-light);padding:4rem 2rem}
+.mathstory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:2rem}
+.mathstory-card{background:var(--white);border:1.5px solid var(--card-border);border-radius:16px;padding:1.25rem;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s}
+.mathstory-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(11,31,75,0.12);border-color:var(--gold)}
+.mathstory-cover{width:100%;aspect-ratio:3/4;border-radius:12px;overflow:hidden;margin-bottom:14px;background:var(--bg-light)}
+.mathstory-cover img{width:100%;height:100%;object-fit:contain;display:block}
+.mathstory-card h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.3}
+.mathstory-card p{font-size:12.5px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;flex:1}
+.mathstory-btn{display:inline-block;align-self:flex-start;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s}
+.mathstory-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
 .assessment-inner{max-width:1100px;margin:0 auto}
 .assess-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:2rem}
 .assess-card{background:var(--navy);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
@@ -110,6 +120,7 @@ footer strong{color:var(--gold-light)}
     <a href="#blog">Blog</a>
     <a href="#basa-app">Literacy Tools</a>
     <a href="#aral-grade1">Numeracy &amp; Intervention</a>
+    <a href="#mathstory">MathSTORY</a>
     <a href="#assessment">Assessment</a>
     <a href="#online-assessment">Online Exam</a>
     <a href="#memos">Memos</a>
@@ -237,14 +248,52 @@ footer strong{color:var(--gold-light)}
         <p>Interactive fraction model builder for elementary and junior high school learners.</p>
         <span class="tag tag-live">Live</span>
       </div>
-      <div class="tool-card">
-        <div class="tool-icon">📚</div>
-        <h3>MathSTORY</h3>
-        <p>Interactive storybook reader with read-aloud detection and embedded math problems, based on SDO Romblon's MathSTORY Book 1 collection.</p>
-        <span class="tag tag-live">Live</span>
-        <div class="tool-btns">
-          <a href="https://tinyurl.com/mathstoryv1" class="tool-btn tool-btn-navy">Open MathSTORY</a>
-        </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATHSTORY -->
+<section class="mathstory-section" id="mathstory">
+  <div class="tools-inner">
+    <div class="section-label">Literacy &amp; Numeracy Intervention</div>
+    <div class="section-title">📚 MathSTORY</div>
+    <div class="section-sub">Mga interactive na kwentong pambata na sabay tinuturo ang pagbasa at matematika — isang intervention tool para sa literacy at numeracy ng mga Key Stage 1 learner, base sa MathSTORY Book 1 ng SDO Romblon.</div>
+    <div class="mathstory-grid">
+      <div class="mathstory-card">
+        <div class="mathstory-cover"><img src="images/mathstory/pawpagong-thumb.png" alt="Si Paw Pagong at si Rabi Kuneho"></div>
+        <h3>Si Paw Pagong at si Rabi Kuneho</h3>
+        <p>Isinulat ni: Genelyn M. Cano<br>Iginuhit ni: Albert Xavier M. Merano</p>
+        <a href="https://tinyurl.com/mathstoryv1" class="mathstory-btn">Basahin →</a>
+      </div>
+      <div class="mathstory-card">
+        <div class="mathstory-cover"><img src="images/mathstory/maria-thumb.png" alt="Ang Masipag na si Maria"></div>
+        <h3>Ang Masipag na si Maria</h3>
+        <p>Isinulat ni: Rogelio B. Candido Jr.<br>Iginuhit ni: Albert Xavier M. Merano</p>
+        <a href="https://tinyurl.com/mathstoryv1" class="mathstory-btn">Basahin →</a>
+      </div>
+      <div class="mathstory-card">
+        <div class="mathstory-cover"><img src="images/mathstory/nakahihigit-thumb.png" alt="Sino ang Mas Nakahihigit"></div>
+        <h3>Sino ang Mas Nakahihigit</h3>
+        <p>Isinulat ni: Elizabeth B. Pasion<br>Iginuhit ni: Albert Xavier M. Merano</p>
+        <a href="https://tinyurl.com/mathstoryv1" class="mathstory-btn">Basahin →</a>
+      </div>
+      <div class="mathstory-card">
+        <div class="mathstory-cover"><img src="images/mathstory/bakasyon-thumb.png" alt="Bakasyon Na"></div>
+        <h3>Bakasyon Na</h3>
+        <p>Isinulat ni: Analy F. Bete<br>Iginuhit ni: Albert Xavier M. Merano</p>
+        <a href="https://tinyurl.com/mathstoryv1" class="mathstory-btn">Basahin →</a>
+      </div>
+      <div class="mathstory-card">
+        <div class="mathstory-cover"><img src="images/mathstory/diding-thumb.png" alt="Ang mga Pananim ni Diding"></div>
+        <h3>Ang mga Pananim ni Diding</h3>
+        <p>Isinulat ni: Maribel Relox<br>Iginuhit ni: Albert Xavier M. Merano</p>
+        <a href="https://tinyurl.com/mathstoryv1" class="mathstory-btn">Basahin →</a>
+      </div>
+      <div class="mathstory-card">
+        <div class="mathstory-cover"><img src="images/mathstory/basura-thumb.png" alt="Basura"></div>
+        <h3>Basura</h3>
+        <p>Isinulat ni: Rinelie D. Ediesca<br>Iginuhit ni: Adrian M. Cebu</p>
+        <a href="https://tinyurl.com/mathstoryv1" class="mathstory-btn">Basahin →</a>
       </div>
     </div>
   </div>
