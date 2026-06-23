@@ -81,6 +81,7 @@ nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justif
 .assess-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(11,31,75,0.25)}
 .assess-icon{font-size:32px;margin-bottom:1rem;display:inline-block;transition:transform 0.2s}
 .assess-card:hover .assess-icon{transform:scale(1.2)}
+.card-icon{display:inline-block;transition:transform 0.2s}
 .assess-card h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px}
 .assess-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;flex:1;margin-bottom:1rem}
 .assess-btn{display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;align-self:flex-start}
@@ -259,6 +260,15 @@ footer strong{color:var(--gold-light)}
         <p>Interactive fraction model builder for elementary and junior high school learners.</p>
         <span class="tag tag-live">Live</span>
       </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔤</div>
+        <h3>Numbers Crossword</h3>
+        <p>Interactive bilingual (English/Tagalog) crossword puzzle game. Practice spelling number words with 3 difficulty levels (Easy 5 numbers, Average 7 numbers, Difficult all 10). Features voice feedback, school/district login, and real-time progress tracking.</p>
+        <span class="tag tag-live">Live</span>
+        <div class="tool-btns">
+          <a href="https://tinyurl.com/crosswordv1" class="tool-btn tool-btn-navy">Open Crossword</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -359,8 +369,8 @@ footer strong{color:var(--gold-light)}
     <div class="section-sub">Interactive reading tools that support literacy development alongside numeracy instruction — read-aloud practice, phonics instruction, and reading fluency assessment.</div>
 
     <div class="assess-grid">
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">📖</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">📖</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">BASA App v1</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           An interactive read-aloud tool that supports literacy integration in mathematics classrooms.
@@ -381,8 +391,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">🗣️</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">🗣️</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Fluency Checker</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           An oral reading fluency assessment tool that helps teachers check learners' reading speed and accuracy.
@@ -402,8 +412,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">🔤</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">🔤</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Marungko Reading Tool</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A full Marungko Approach digital reading tool — from sound recognition through syllables,
@@ -434,8 +444,8 @@ footer strong{color:var(--gold-light)}
     <div class="section-sub">Interactive numeracy practice and structured Grade 1 intervention materials, designed for use during ARAL time.</div>
 
     <div class="numeracy-grid">
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">🧮</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">🧮</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Mental Math v1</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A gamified mental math app that builds learners' speed and confidence in addition and subtraction.
@@ -456,8 +466,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">📚</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">📚</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">ARAL Materials v1</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A complete set of Grade 1 mathematics materials designed specifically for the <strong style="color:var(--white)">ARAL</strong> program.
@@ -475,8 +485,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">🧟</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">🧟</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Number Hunters</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A Mario-inspired math hunt game where learners explore a platform world to find the
@@ -497,8 +507,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">🌽</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">🌽</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Bilang vs Zombies</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A Grade 1 interactive math game with progressive levels — from counting and place value to
@@ -517,8 +527,8 @@ footer strong{color:var(--gold-light)}
           🚀 Open Bilang vs Zombies ↗
         </a>
       </div>
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">⭐</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">⭐</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Bilang Champs</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A counting numbers adventure for <strong style="color:var(--white)">Grades 1 to 3</strong> (1–20, 1–50, 1–100).
@@ -539,8 +549,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">🔗</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">🔗</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Number Bond</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           An interactive number bond game that builds learners' understanding of the
@@ -561,8 +571,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">🧟</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">🧟</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Place Value Builder</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A <strong style="color:var(--white)">Plants vs Zombies-themed</strong> place value game. Learners build
@@ -582,8 +592,8 @@ footer strong{color:var(--gold-light)}
         </a>
       </div>
 
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.5rem">📖</div>
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
+        <div class="card-icon" style="font-size:2.5rem">📖</div>
         <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold)">Number Reader - Levels</div>
         <p style="color:rgba(255,255,255,0.75);font-size:14px;line-height:1.7">
           A reading-numbers practice app covering <strong style="color:var(--white)">1 to 100</strong> across
@@ -683,7 +693,7 @@ footer strong{color:var(--gold-light)}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
 
       <!-- Download Card -->
-      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="background:var(--navy);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.25)';this.querySelector('.card-icon').style.transform='scale(1.2)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.querySelector('.card-icon').style.transform=''">
         <div style="display:flex;align-items:center;gap:12px">
           <div style="width:48px;height:48px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">📄</div>
           <div>
