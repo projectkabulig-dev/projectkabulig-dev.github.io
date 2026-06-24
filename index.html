@@ -893,5 +893,48 @@ footer strong{color:var(--gold-light)}
   <p style="margin-top:6px">Developed by <strong>Sir Dyon</strong> - AI-Assisted, Not AI-Generated - Aligned with DepEd Standards</p>
 </footer>
 
+<script>
+(function(){
+  var LOGGER_URL = "https://script.google.com/macros/s/AKfycbz33npxYIXDq2JA7_GBhT5Vp6VfS4wsig7xeSjdNv3oXzEAPXKeQqLezoxPSZJIKhiU_A/exec";
+
+  function detectDevice(ua){
+    return /Mobi|Android|iPhone|iPad/i.test(ua) ? "Mobile" : "Desktop";
+  }
+
+  function detectBrowser(ua){
+    if (ua.indexOf("Edg") > -1) return "Edge";
+    if (ua.indexOf("Chrome") > -1 && ua.indexOf("Edg") === -1) return "Chrome";
+    if (ua.indexOf("Firefox") > -1) return "Firefox";
+    if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) return "Safari";
+    return "Other";
+  }
+
+  function logVisit(){
+    try {
+      var ua = navigator.userAgent;
+      var page = location.hash || "/";
+      var referrer = document.referrer || "direct";
+
+      var params = "?page=" + encodeURIComponent(page)
+                 + "&referrer=" + encodeURIComponent(referrer)
+                 + "&device=" + encodeURIComponent(detectDevice(ua))
+                 + "&browser=" + encodeURIComponent(detectBrowser(ua));
+
+      // Image-pixel request avoids CORS issues entirely — no response is read.
+      var pixel = new Image();
+      pixel.src = LOGGER_URL + params;
+    } catch (e) {
+      // Fail silently — tracking must never break the page for the user.
+    }
+  }
+
+  // Log the initial page load
+  logVisit();
+
+  // Log every time the user navigates to a different section (#blog, #assessment, etc.)
+  window.addEventListener("hashchange", logVisit);
+})();
+</script>
+
 </body>
 </html>
