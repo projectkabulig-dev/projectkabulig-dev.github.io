@@ -912,17 +912,23 @@ footer strong{color:var(--gold-light)}
   function logVisit(){
     try {
       var ua = navigator.userAgent;
-      var page = location.hash || "/";
-      var referrer = document.referrer || "direct";
+      var payload = {
+        timestamp: new Date().toISOString(),
+        page: location.hash || "/",
+        referrer: document.referrer || "Direct",
+        device: detectDevice(ua),
+        browser: detectBrowser(ua)
+      };
 
-      var params = "?page=" + encodeURIComponent(page)
-                 + "&referrer=" + encodeURIComponent(referrer)
-                 + "&device=" + encodeURIComponent(detectDevice(ua))
-                 + "&browser=" + encodeURIComponent(detectBrowser(ua));
-
-      // Image-pixel request avoids CORS issues entirely — no response is read.
-      var pixel = new Image();
-      pixel.src = LOGGER_URL + params;
+      // text/plain content-type avoids a CORS preflight (OPTIONS) request,
+      // which Apps Script web apps do not handle. The script still parses
+      // the raw body as JSON via JSON.parse(e.postData.contents).
+      fetch(LOGGER_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
     } catch (e) {
       // Fail silently — tracking must never break the page for the user.
     }
