@@ -87,6 +87,42 @@ nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justif
 .assess-btn{display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;align-self:flex-start}
 .assess-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
 .memos{background:var(--gold-pale);padding:4rem 2rem}
+.mp-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:2rem}
+.mp-list-item{background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.12);border-radius:12px;padding:1.25rem;display:flex;gap:12px;align-items:flex-start}
+.mp-list-icon{font-size:22px;flex-shrink:0}
+.mp-list-text h4{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px}
+.mp-list-text p{font-size:12.5px;color:rgba(255,255,255,0.6);line-height:1.6}
+.mp-badge{display:inline-block;background:rgba(212,160,23,0.18);color:var(--gold-light);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:6px}
+.mp-howto{background:rgba(255,255,255,0.04);border-radius:10px;padding:1.25rem 1.5rem;margin-top:1.25rem}
+.mp-howto-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:10px}
+.mp-howto ol{margin:0;padding-left:1.1rem;color:rgba(255,255,255,0.75);font-size:13px;line-height:1.85}
+.mp-howto ol li{margin-bottom:2px}
+.mp-howto a{color:var(--gold-light);font-weight:700;text-decoration:underline}
+.mp-section{background:var(--white);padding:4rem 2rem}
+.mp-inner{max-width:1100px;margin:0 auto}
+.mp-card{background:rgba(255,255,255,0.04);border:2px solid var(--gold);border-radius:16px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-top:2rem;transition:transform 0.2s,box-shadow 0.2s}
+.mp-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(212,160,23,0.18)}
+.mp-left{display:flex;align-items:center;gap:1.25rem}
+.mp-icon{font-size:40px}
+.mp-text h3{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px}
+.mp-text p{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;max-width:480px}
+.mp-btn{display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;white-space:nowrap;flex-shrink:0}
+.mp-btn:hover{background:var(--gold-light);transform:translateY(-2px)}
+.mp-overlay{display:none;position:fixed;inset:0;background:rgba(7,20,48,0.72);z-index:1000;align-items:center;justify-content:center;padding:1.5rem}
+.mp-overlay.open{display:flex}
+.mp-modal{background:var(--white);border-radius:16px;max-width:440px;width:100%;padding:2rem;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.35)}
+.mp-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;color:var(--text-muted);cursor:pointer;line-height:1}
+.mp-modal h3{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.mp-modal p.mp-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:1.25rem}
+.mp-field{margin-bottom:14px}
+.mp-field label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.mp-field input,.mp-field select{width:100%;padding:10px 12px;border:1.5px solid var(--card-border);border-radius:8px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--navy);background:var(--white)}
+.mp-field input:focus,.mp-field select:focus{outline:none;border-color:var(--gold)}
+.mp-error{font-size:12px;color:#C0392B;margin-top:6px;display:none}
+.mp-error.show{display:block}
+.mp-submit{width:100%;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:13px;border-radius:8px;border:none;cursor:pointer;margin-top:6px;transition:background 0.2s}
+.mp-submit:hover{background:var(--navy-light)}
+.mp-note{font-size:11px;color:var(--text-muted);margin-top:10px;line-height:1.5;text-align:center}
 .memos-inner{max-width:1100px;margin:0 auto}
 .memos-card{background:var(--white);border:2px solid var(--gold);border-radius:16px;padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-top:2rem;transition:transform 0.2s,box-shadow 0.2s}
 .memos-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(212,160,23,0.2)}
@@ -127,6 +163,7 @@ footer strong{color:var(--gold-light)}
     <a href="#assessment">Assessment</a>
     <a href="#online-assessment">Online Exam</a>
     <a href="#memos">Memos</a>
+    <a href="#master-prompts">Master Prompts</a>
     <a href="#about">About</a>
   </div>
 </nav>
@@ -834,39 +871,6 @@ footer strong{color:var(--gold-light)}
   </div>
 </section>
 
-<!-- MASTER PROMPTS -->
-<section class="assessment" style="background:var(--navy);padding:4rem 2rem">
-  <div class="assessment-inner">
-    <div class="section-label" style="color:var(--gold-light)">AI-Assisted Tools</div>
-    <div class="section-title" style="color:var(--white)">KABULIG Master Prompts</div>
-    <div class="section-sub" style="color:rgba(255,255,255,0.6)">Copy-paste ready AI prompts for teachers and school heads - validated, DepEd-aligned, and designed for the Philippine classroom context.</div>
-    <div class="assess-grid">
-      <div class="assess-card" style="background:var(--navy-light);border:1px solid rgba(212,160,23,0.3);padding:2rem">
-        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem">
-          <div class="assess-icon" style="margin-bottom:0">📐</div>
-          <div>
-            <h3 style="margin-bottom:4px">ARAL Math Activity Sheet Master Prompt</h3>
-            <span style="display:inline-block;background:rgba(212,160,23,0.2);color:var(--gold-light);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px">v3.1</span>
-          </div>
-        </div>
-        <p style="margin-bottom:1.25rem">5-stage AI-assisted generator for small-group, time-boxed Mathematics activity sheets for ARAL sessions — levelled for Emerging learners, max 5 learners, exactly 30 minutes per sheet.</p>
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(212,160,23,0.25);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
-          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--gold-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Paano Gamitin</div>
-          <ol style="margin:0;padding-left:1.2rem;color:rgba(255,255,255,0.8);font-size:13.5px;line-height:1.9">
-            <li>I-download ang Master Prompt (.docx) sa button sa ibaba</li>
-            <li>Buksan ang <a href="https://claude.ai" target="_blank" style="color:var(--gold-light);text-decoration:underline">claude.ai</a> — libre lang, walang bayad</li>
-            <li>I-paste ang buong master prompt sa chat box</li>
-            <li>Punan ang Input Block sa ibaba ng prompt (Grade Level, Learning Competency) tapos i-send</li>
-            <li>Sagutin ang mga tanong ni Claude kung meron (hal. paghahati ng competency sa ilang sessions), tapos i-print ang resulta</li>
-          </ol>
-        </div>
-        <a href="https://docs.google.com/document/d/1ed8I9v8aeNbSWQGvfqDEWPFJSM3SK8_X/export?format=docx" style="display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:11px 24px;border-radius:8px;text-decoration:none" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">⬇ Download Master Prompt</a>
-      </div>
-    </div>
-    <p style="text-align:center;margin-top:2rem;font-size:13px;color:rgba(255,255,255,0.4)">All master prompts are AI-Assisted, not AI-Generated. Compliant with DepEd Order No. 016, s. 2026 and DepEd Order 003, s. 2026.</p>
-  </div>
-</section>
-
 <!-- LEARNING RESOURCES -->
 <section style="background:var(--bg-light);padding:4rem 2rem">
   <div style="max-width:1100px;margin:0 auto">
@@ -904,6 +908,83 @@ footer strong{color:var(--gold-light)}
     </div>
   </div>
 </section>
+
+<!-- MASTER PROMPTS -->
+<section class="mp-section" id="master-prompts">
+  <div class="mp-inner">
+    <div class="section-label">AI-Assisted Tools</div>
+    <div class="section-title">KABULIG Master Prompts</div>
+    <div class="section-sub">Copy-paste ready AI prompts for teachers and school heads — validated, DepEd-aligned, and designed for the Philippine classroom context.</div>
+    <div class="numeracy-grid">
+      <div class="assess-card">
+        <div class="assess-icon">📋</div>
+        <h3>KABULIG Learning Packet Generator</h3>
+        <span class="mp-badge">HINGA at HINAY Edition · v2.6</span>
+        <p style="margin-top:8px">Generates a print-ready, self-instructional Learning Packet (Word document) from a Learning Competency — for classes affected by suspensions or distance learning. Grades 1–3 auto-resolve to HINAY; Grades 4–12 auto-resolve to HINGA.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal()">Access Master Prompts</button>
+      </div>
+      <div class="assess-card">
+        <div class="assess-icon">📐</div>
+        <h3>ARAL Math Activity Sheet Master Prompt</h3>
+        <span class="mp-badge">v3.1</span>
+        <p style="margin-top:8px">5-stage AI-assisted generator for small-group, time-boxed Mathematics activity sheets for ARAL sessions — levelled for Emerging learners, max 5 learners, exactly 30 minutes per sheet.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal()">Access Master Prompts</button>
+      </div>
+    </div>
+    <div class="mp-howto" style="background:var(--navy);margin-top:2rem">
+      <div class="mp-howto-label">Paano Gamitin</div>
+      <ol>
+        <li>I-click ang "Access Master Prompts" sa card ng gusto mong prompt, i-fill up ang District at School Name, tapos i-download ang Master Prompt (.docx).</li>
+        <li>Buksan ang <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> — libre lang, walang bayad.</li>
+        <li>I-paste ang buong master prompt sa chat box.</li>
+        <li>Punan ang Input Block sa ibaba ng prompt (Grade Level, Learning Area, Term No., Week No., Learning Competency, atbp.) tapos i-send.</li>
+        <li>Sagutin ang mga tanong ni Claude kung meron, tapos i-download ang resultang file.</li>
+      </ol>
+    </div>
+    <p style="text-align:center;margin-top:1.5rem;font-size:12px;color:var(--text-muted)">All master prompts are AI-Assisted, not AI-Generated. Compliant with DepEd Order No. 016, s. 2026 and DepEd Order 003, s. 2026.</p>
+  </div>
+</section>
+
+<!-- MASTER PROMPTS ACCESS-GATE MODAL -->
+<div class="mp-overlay" id="mpOverlay">
+  <div class="mp-modal">
+    <button type="button" class="mp-modal-close" onclick="mpCloseModal()" aria-label="Close">&times;</button>
+    <h3>Before you download</h3>
+    <p class="mp-desc">Help us track which schools and districts are using KABULIG materials. This takes 10 seconds and only needs to be filled out once per device.</p>
+    <form id="mpForm" onsubmit="return mpSubmit(event)">
+      <div class="mp-field">
+        <label for="mpDistrict">District</label>
+        <select id="mpDistrict" required>
+          <option value="" disabled selected>Select your district</option>
+          <option>Alcantara</option>
+          <option>Banton</option>
+          <option>Corcuera</option>
+          <option>Concepcion</option>
+          <option>Looc</option>
+          <option>San Fernando</option>
+          <option>Cajidiocan-Magdiwang</option>
+          <option>Romblon</option>
+          <option>San Andres</option>
+          <option>Odiongan North</option>
+          <option>Odiongan South</option>
+          <option>San Agustin-Santa Maria-Calatrava</option>
+          <option>San Jose-Santa Fe</option>
+        </select>
+      </div>
+      <div class="mp-field">
+        <label for="mpSchool">School Name</label>
+        <input type="text" id="mpSchool" placeholder="e.g. Calagonsao Elementary School" required>
+      </div>
+      <div class="mp-field">
+        <label for="mpName">Your Name (optional)</label>
+        <input type="text" id="mpName" placeholder="e.g. Juan Dela Cruz">
+      </div>
+      <div class="mp-error" id="mpError">Paki-fill up po ang District at School Name.</div>
+      <button type="submit" class="mp-submit">Proceed to Download</button>
+      <div class="mp-note">Bubuksan ang Google Drive folder sa bagong tab pagkatapos i-submit.</div>
+    </form>
+  </div>
+</div>
 
 <!-- TEAM -->
 <section class="team" id="about">
@@ -972,6 +1053,75 @@ footer strong{color:var(--gold-light)}
 
   // Log every time the user navigates to a different section (#blog, #assessment, etc.)
   window.addEventListener("hashchange", logVisit);
+})();
+</script>
+
+<script>
+(function(){
+  // Replace this with your own deployed Apps Script Web App URL.
+  // See the accompanying Apps Script code (Code.gs) for the Sheet it logs to.
+  var MP_LOGGER_URL = "https://script.google.com/macros/s/AKfycbw6mL8lBhywo5Hs53GDTECBu8g6OODjFGgpHhy_4HMD9KEm-lR7T5zG24VYvTecFrjIsw/exec";
+  var MP_DRIVE_URL = "https://drive.google.com/drive/folders/1NhoyHBPpPdlA9SA3H8_vA4WHFgHpjoeh?usp=sharing";
+  var MP_STORAGE_KEY = "kabulig_mp_access_v1";
+
+  window.mpOpenModal = function(){
+    // Already submitted once on this device — skip straight to the Drive folder.
+    var saved = null;
+    try { saved = localStorage.getItem(MP_STORAGE_KEY); } catch(e) {}
+    if (saved) {
+      window.open(MP_DRIVE_URL, "_blank");
+      return;
+    }
+    document.getElementById("mpOverlay").classList.add("open");
+  };
+
+  window.mpCloseModal = function(){
+    document.getElementById("mpOverlay").classList.remove("open");
+  };
+
+  window.mpSubmit = function(evt){
+    evt.preventDefault();
+    var district = document.getElementById("mpDistrict").value.trim();
+    var school = document.getElementById("mpSchool").value.trim();
+    var name = document.getElementById("mpName").value.trim();
+    var errorEl = document.getElementById("mpError");
+
+    if (!district || !school) {
+      errorEl.classList.add("show");
+      return false;
+    }
+    errorEl.classList.remove("show");
+
+    var payload = {
+      timestamp: new Date().toISOString(),
+      district: district,
+      school: school,
+      name: name || "(not provided)",
+      resource: "Master Prompts"
+    };
+
+    try {
+      fetch(MP_LOGGER_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      // Logging must never block the download.
+    }
+
+    try { localStorage.setItem(MP_STORAGE_KEY, JSON.stringify(payload)); } catch(e) {}
+
+    window.mpCloseModal();
+    window.open(MP_DRIVE_URL, "_blank");
+    return false;
+  };
+
+  // Allow closing the modal by clicking the dark overlay (not the modal card itself)
+  document.getElementById("mpOverlay").addEventListener("click", function(evt){
+    if (evt.target === this) window.mpCloseModal();
+  });
 })();
 </script>
 
