@@ -921,14 +921,14 @@ footer strong{color:var(--gold-light)}
         <h3>KABULIG Learning Packet Generator</h3>
         <span class="mp-badge">HINGA at HINAY Edition · v2.6</span>
         <p style="margin-top:8px">Generates a print-ready, self-instructional Learning Packet (Word document) from a Learning Competency — for classes affected by suspensions or distance learning. Grades 1–3 auto-resolve to HINAY; Grades 4–12 auto-resolve to HINGA.</p>
-        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal()">Access Master Prompts</button>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('KABULIG Learning Packet Generator')">Access Master Prompts</button>
       </div>
       <div class="assess-card">
         <div class="assess-icon">📐</div>
         <h3>ARAL Math Activity Sheet Master Prompt</h3>
         <span class="mp-badge">v3.1</span>
         <p style="margin-top:8px">5-stage AI-assisted generator for small-group, time-boxed Mathematics activity sheets for ARAL sessions — levelled for Emerging learners, max 5 learners, exactly 30 minutes per sheet.</p>
-        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal()">Access Master Prompts</button>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('ARAL Math Activity Sheet Master Prompt')">Access Master Prompts</button>
       </div>
     </div>
     <div class="mp-howto" style="background:var(--navy);margin-top:2rem">
@@ -1063,15 +1063,21 @@ footer strong{color:var(--gold-light)}
   var MP_LOGGER_URL = "https://script.google.com/macros/s/AKfycbw6mL8lBhywo5Hs53GDTECBu8g6OODjFGgpHhy_4HMD9KEm-lR7T5zG24VYvTecFrjIsw/exec";
   var MP_DRIVE_URL = "https://drive.google.com/drive/folders/1NhoyHBPpPdlA9SA3H8_vA4WHFgHpjoeh?usp=sharing";
   var MP_STORAGE_KEY = "kabulig_mp_access_v1";
+  var mpPendingResource = "Master Prompts";
 
-  window.mpOpenModal = function(){
-    // Already submitted once on this device — skip straight to the Drive folder.
+  window.mpOpenModal = function(resourceName){
+    mpPendingResource = resourceName || "Master Prompts";
+
+    // Convenience only — prefill the fields from the last submission on this device.
+    // Does NOT skip the form: every click still opens the gate and logs a new entry.
     var saved = null;
-    try { saved = localStorage.getItem(MP_STORAGE_KEY); } catch(e) {}
+    try { saved = JSON.parse(localStorage.getItem(MP_STORAGE_KEY)); } catch(e) {}
     if (saved) {
-      window.open(MP_DRIVE_URL, "_blank");
-      return;
+      if (document.getElementById("mpDistrict")) document.getElementById("mpDistrict").value = saved.district || "";
+      if (document.getElementById("mpSchool")) document.getElementById("mpSchool").value = saved.school || "";
+      if (document.getElementById("mpName")) document.getElementById("mpName").value = (saved.name && saved.name !== "(not provided)") ? saved.name : "";
     }
+
     document.getElementById("mpOverlay").classList.add("open");
   };
 
@@ -1097,7 +1103,7 @@ footer strong{color:var(--gold-light)}
       district: district,
       school: school,
       name: name || "(not provided)",
-      resource: "Master Prompts"
+      resource: mpPendingResource
     };
 
     try {
