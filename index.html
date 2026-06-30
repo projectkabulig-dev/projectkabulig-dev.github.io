@@ -1068,7 +1068,10 @@ footer strong{color:var(--gold-light)}
   // Replace this with your own deployed Apps Script Web App URL.
   // See the accompanying Apps Script code (Code.gs) for the Sheet it logs to.
   var MP_LOGGER_URL = "https://script.google.com/macros/s/AKfycbyzRGIpTtnhNQ8kTRQTfN6uPERjyWCNhReAMX0sbIHVZd7EI_BBcsLkDCH3ydQ61JnuDg/exec";
-  var MP_DRIVE_URL = "https://drive.google.com/drive/folders/1NhoyHBPpPdlA9SA3H8_vA4WHFgHpjoeh?usp=sharing";
+  var MP_DRIVE_URL = "https://drive.google.com/drive/folders/1NhoyHBPpPdlA9SA3H8_vA4WHFgHpjoeh?usp=sharing"; // default folder, used for any resource not listed below
+  var MP_DRIVE_URLS = {
+    "Mentoring and Coaching TA Plan Generator": "https://drive.google.com/drive/folders/1Dd8vvYnBKdrq1e9_-XLxCFzGv60aw2kA?usp=sharing"
+  };
   var MP_STORAGE_KEY = "kabulig_mp_access_v1";
   var mpPendingResource = "Master Prompts";
 
@@ -1127,7 +1130,7 @@ footer strong{color:var(--gold-light)}
     try { localStorage.setItem(MP_STORAGE_KEY, JSON.stringify(payload)); } catch(e) {}
 
     window.mpCloseModal();
-    window.open(MP_DRIVE_URL, "_blank");
+    window.open(MP_DRIVE_URLS[mpPendingResource] || MP_DRIVE_URL, "_blank");
     return false;
   };
 
