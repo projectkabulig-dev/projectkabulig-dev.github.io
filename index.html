@@ -10,14 +10,43 @@
 html{scroll-behavior:smooth}
 :root{--navy:#0B1F4B;--navy-light:#162B5E;--navy-dark:#071430;--gold:#D4A017;--gold-light:#F0C040;--gold-pale:#FDF3D0;--white:#FFFFFF;--text-muted:#6B7AA0;--bg-light:#F5F7FF;--card-border:#E0E8FF}
 body{font-family:'Nunito',sans-serif;background:var(--bg-light);color:var(--navy);overflow-x:hidden}
-nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.nav-badge{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--navy-dark)}
+:root{--sidebar-w:264px}
+
+/* ===== SIDEBAR (desktop) ===== */
+.nav-logo,.sidebar-logo{display:flex;align-items:center;gap:10px}
+.nav-badge{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--navy-dark);flex-shrink:0}
 .nav-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:var(--white)}
 .nav-title em{color:var(--gold-light);font-style:normal}
-.nav-links{display:flex;gap:1.5rem}
-.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:13px;font-weight:600;transition:color 0.2s}
-.nav-links a:hover{color:var(--gold-light)}
+
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);background:var(--navy-dark);border-right:1px solid rgba(255,255,255,0.06);z-index:200;display:flex;flex-direction:column;overflow-y:auto}
+.sidebar-logo{padding:1.5rem 1.5rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:0.5rem}
+.sidebar-links{display:flex;flex-direction:column;padding:0.5rem 0.75rem 1.5rem;gap:2px}
+.sidebar-links a{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.65);text-decoration:none;font-size:13.5px;font-weight:600;padding:11px 12px;border-radius:8px;transition:background 0.15s,color 0.15s;border-left:3px solid transparent}
+.sb-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+.sidebar-links a:hover{background:rgba(255,255,255,0.05);color:var(--white)}
+.sidebar-links a.active{background:rgba(212,160,23,0.12);color:var(--gold-light);border-left-color:var(--gold)}
+
+/* ===== TOPBAR (mobile) ===== */
+.topbar{display:none;background:var(--navy);padding:0 1.25rem;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:150;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.menu-toggle{width:38px;height:38px;background:none;border:1.5px solid rgba(255,255,255,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer}
+.menu-toggle span{width:18px;height:2px;background:var(--white);border-radius:2px;transition:transform 0.2s,opacity 0.2s}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(7,20,48,0.6);z-index:190}
+.sidebar-overlay.open{display:block}
+
+/* ===== MAIN CONTENT + PANELS ===== */
+.main-content{margin-left:var(--sidebar-w)}
+.main-content>section[data-panel]{display:none;animation:panelFade 0.25s ease}
+.main-content>section[data-panel].panel-active{display:block}
+@keyframes panelFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+footer{margin-left:var(--sidebar-w)}
+
+@media(max-width:900px){
+  .topbar{display:flex}
+  .sidebar{transform:translateX(-100%);transition:transform 0.25s ease;box-shadow:8px 0 24px rgba(0,0,0,0.3)}
+  .sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0}
+  footer{margin-left:0}
+}
 .hero{background:var(--navy);padding:5rem 2rem 4rem;text-align:center}
 .hero-tag{display:inline-block;background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.4);color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:1.5rem}
 .hero h1{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,4vw,2.8rem);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:1rem}
@@ -149,35 +178,55 @@ footer strong{color:var(--gold-light)}
 <body>
 
 <!-- NAV -->
-<nav>
+<!-- MOBILE TOPBAR -->
+<div class="topbar">
   <div class="nav-logo">
     <div class="nav-badge">KBG</div>
     <span class="nav-title">Project <em>KABULIG</em></span>
   </div>
-  <div class="nav-links">
-    <a href="#hero">Home</a>
-    <a href="#blog">Blog</a>
-    <a href="#basa-app">Literacy Tools</a>
-    <a href="#aral-grade1">Numeracy &amp; Intervention</a>
-    <a href="#mathstory">MathSTORY</a>
-    <a href="#assessment">Assessment</a>
-    <a href="#online-assessment">Online Exam</a>
-    <a href="#memos">Memos</a>
-    <a href="#master-prompts">Master Prompts</a>
-    <a href="#about">About</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="nav-badge">KBG</div>
+    <span class="nav-title">Project <em>KABULIG</em></span>
   </div>
-</nav>
+  <nav class="sidebar-links">
+    <a href="#hero" data-panel-link="home"><span class="sb-icon">🏠</span>Home</a>
+    <a href="#blog" data-panel-link="blog"><span class="sb-icon">📰</span>Blog</a>
+    <a href="#tools" data-panel-link="tools"><span class="sb-icon">🧩</span>KABULIG Digital Suite</a>
+    <a href="#mathstory" data-panel-link="mathstory"><span class="sb-icon">📖</span>MathSTORY</a>
+    <a href="#basa-app" data-panel-link="literacy"><span class="sb-icon">🔤</span>Literacy Tools</a>
+    <a href="#aral-grade1" data-panel-link="numeracy"><span class="sb-icon">🔢</span>Numeracy &amp; Intervention</a>
+    <a href="#assessment" data-panel-link="assessment"><span class="sb-icon">📊</span>Mathematics Assessment</a>
+    <a href="#online-assessment" data-panel-link="assessment-tool"><span class="sb-icon">📝</span>KABULIG Assessment Tool</a>
+    <a href="#lrms" data-panel-link="lrms"><span class="sb-icon">📚</span>Division LRMS</a>
+    <a href="#memos" data-panel-link="memos"><span class="sb-icon">📋</span>Division Memoranda</a>
+    <a href="#master-prompts" data-panel-link="master-prompts"><span class="sb-icon">🤖</span>KABULIG Master Prompts</a>
+    <a href="#about" data-panel-link="about"><span class="sb-icon">👤</span>About</a>
+  </nav>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main-content" id="mainContent">
 
 <!-- HERO -->
-<section class="hero" id="hero">
+<section class="hero" id="hero" data-panel="home">
   <div class="hero-tag">Romblon - CID Mathematics</div>
   <div style="font-family:'Outfit',sans-serif;font-size:clamp(1rem,3vw,1.2rem);font-weight:700;color:rgba(255,255,255,0.45);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.3rem">Project</div>
   <div style="font-family:'Outfit',sans-serif;font-size:clamp(3.5rem,10vw,7rem);font-weight:900;color:var(--gold-light);line-height:1;margin-bottom:1.25rem;letter-spacing:3px">KABULIG</div>
   <h1>Empowering Learners,<br>Teachers, <span>&amp; School Heads</span></h1>
   <p>Project KABULIG is a suite of AI-assisted instructional tools, dashboards, and programs designed to elevate mathematics education across the 13 island districts of Romblon.</p>
   <div class="hero-btns">
-    <button class="btn-gold">Explore Tools</button>
-    <button class="btn-outline">Learn More</button>
+    <button class="btn-gold" onclick="location.hash='#tools'">Explore Tools</button>
+    <button class="btn-outline" onclick="location.hash='#about'">Learn More</button>
   </div>
 </section>
 
@@ -190,7 +239,7 @@ footer strong{color:var(--gold-light)}
 </div>
 
 <!-- ABOUT -->
-<section class="about">
+<section class="about" data-panel="home">
   <div class="about-inner">
     <div class="about-text">
       <div class="section-label">About the Project</div>
@@ -209,7 +258,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- BLOG -->
-<section style="background:var(--bg-light);padding:4rem 2rem" id="blog">
+<section style="background:var(--bg-light);padding:4rem 2rem" id="blog" data-panel="blog">
   <div style="max-width:900px;margin:0 auto">
     <div class="section-label">News & Updates</div>
     <div class="section-title">KABULIG Blog</div>
@@ -248,7 +297,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- KABULIG DIGITAL SUITE -->
-<section class="tools" id="tools">
+<section class="tools" id="tools" data-panel="tools">
   <div class="tools-inner">
     <div class="section-label">Featured Tools</div>
     <div class="section-title">KABULIG Digital Suite</div>
@@ -297,12 +346,21 @@ footer strong{color:var(--gold-light)}
           <a href="https://tinyurl.com/areamodelmultiplication" class="tool-btn tool-btn-gold">Open Tool</a>
         </div>
       </div>
+      <div class="tool-card">
+        <div class="tool-icon">🧮</div>
+        <h3>Factor Lab</h3>
+        <p>Eight interactive machines that turn tricky polynomials into easy, step-by-step factoring wins - built for Grade 8-10 Math learners.</p>
+        <span class="tag tag-live">Live</span>
+        <div class="tool-btns">
+          <a href="https://tinyurl.com/factoring01v1" class="tool-btn tool-btn-gold">Open Tool</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- MATHSTORY -->
-<section class="mathstory-section" id="mathstory">
+<section class="mathstory-section" id="mathstory" data-panel="mathstory">
   <div class="tools-inner">
     <div class="section-label">Literacy &amp; Numeracy Intervention</div>
     <div class="section-title">📚 MathSTORY</div>
@@ -387,11 +445,19 @@ footer strong{color:var(--gold-light)}
         <a href="https://tinyurl.com/mathstoryv2" class="mathstory-btn">Basahin →</a>
       </div>
     </div>
+
+    <h3 style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:var(--navy);letter-spacing:0.5px;margin:2.5rem 0 -0.5rem;text-transform:uppercase">📖 MathSTORY Book 3</h3>
+    <div class="mathstory-grid">
+      <div class="mathstory-card">
+        <div class="mathstory-cover" style="display:flex;align-items:center;justify-content:center;font-size:56px;background:var(--gold-pale)">🧺</div>
+        <h3>Namalengke si Nena</h3>
+        <p>Isang kwentong addition para sa Grade 2-3. Sumama kay Nena at Nanay sa palengke habang natututo ng pagdaragdag.</p>
+        <a href="https://tinyurl.com/namalengkesinena" class="mathstory-btn">Basahin →</a>
+      </div>
+    </div>
   </div>
 </section>
-
-<!-- LITERACY TOOLS SECTION (BASA App + Fluency Checker) -->
-<section style="background:var(--white);padding:4rem 2rem" id="basa-app">
+<section style="background:var(--white);padding:4rem 2rem" id="basa-app" data-panel="literacy">
   <div style="max-width:1100px;margin:0 auto">
     <div class="section-title">Literacy Tools</div>
     <div class="section-sub">Interactive reading tools that support literacy development alongside numeracy instruction — read-aloud practice, phonics instruction, and reading fluency assessment.</div>
@@ -466,7 +532,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- NUMERACY ARAL TOOLS SECTION (Mental Math + ARAL Materials) -->
-<section style="background:var(--bg-light);padding:4rem 2rem" id="aral-grade1">
+<section style="background:var(--bg-light);padding:4rem 2rem" id="aral-grade1" data-panel="numeracy">
   <div style="max-width:1100px;margin:0 auto">
     <div class="section-title">Numeracy &amp; Intervention</div>
     <div class="section-sub">Interactive numeracy practice and structured Grade 1 intervention materials, designed for use during ARAL time.</div>
@@ -716,7 +782,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- MATHEMATICS ASSESSMENT -->
-<section class="assessment" id="assessment">
+<section class="assessment" id="assessment" data-panel="assessment">
   <div class="assessment-inner">
     <div class="section-label">Assessment Tools</div>
     <div class="section-title">Mathematics Assessment</div>
@@ -742,7 +808,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- KABULIG ONLINE ASSESSMENT -->
-<section id="online-assessment" style="background:var(--bg-light);padding:4rem 2rem">
+<section id="online-assessment" data-panel="assessment-tool" style="background:var(--bg-light);padding:4rem 2rem">
   <div style="max-width:1100px;margin:0 auto">
 
     <div class="section-label">Online Assessment</div>
@@ -872,7 +938,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- LEARNING RESOURCES -->
-<section style="background:var(--bg-light);padding:4rem 2rem">
+<section id="lrms" data-panel="lrms" style="background:var(--bg-light);padding:4rem 2rem">
   <div style="max-width:1100px;margin:0 auto">
     <div class="section-label">Learning Resources</div>
     <div class="section-title">Division Learning Resource Management System</div>
@@ -891,7 +957,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- MEMOS -->
-<section class="memos" id="memos">
+<section class="memos" id="memos" data-panel="memos">
   <div class="memos-inner">
     <div class="section-label">Resources</div>
     <div class="section-title">Division Memoranda</div>
@@ -910,7 +976,7 @@ footer strong{color:var(--gold-light)}
 </section>
 
 <!-- MASTER PROMPTS -->
-<section class="mp-section" id="master-prompts">
+<section class="mp-section" id="master-prompts" data-panel="master-prompts">
   <div class="mp-inner">
     <div class="section-label">AI-Assisted Tools</div>
     <div class="section-title">KABULIG Master Prompts</div>
@@ -994,7 +1060,7 @@ footer strong{color:var(--gold-light)}
 </div>
 
 <!-- TEAM -->
-<section class="team" id="about">
+<section class="team" id="about" data-panel="about">
   <div class="team-inner">
     <div class="section-label">Project Lead</div>
     <div class="section-title">Meet the Developer</div>
@@ -1009,10 +1075,73 @@ footer strong{color:var(--gold-light)}
   </div>
 </section>
 
+</main>
+
 <footer>
   <p>2026 <strong>Project KABULIG</strong> - Romblon - Curriculum Implementation Division</p>
   <p style="margin-top:6px">Developed by <strong>Sir Dyon</strong> - AI-Assisted, Not AI-Generated - Aligned with DepEd Standards</p>
 </footer>
+
+<script>
+(function(){
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  var menuToggle = document.getElementById('menuToggle');
+  var sidebarLinks = document.querySelectorAll('.sidebar-links a');
+  var panelEls = document.querySelectorAll('.main-content > section[data-panel]');
+
+  // Map an anchor id (e.g. "hero", "mathstory") to its panel name (data-panel value)
+  function panelForHash(hash){
+    var id = (hash || '').replace('#','');
+    if (!id) return 'home';
+    var target = document.getElementById(id);
+    if (target && target.hasAttribute('data-panel')) return target.getAttribute('data-panel');
+    return 'home';
+  }
+
+  function activatePanel(panelName){
+    panelEls.forEach(function(el){
+      el.classList.toggle('panel-active', el.getAttribute('data-panel') === panelName);
+    });
+    sidebarLinks.forEach(function(link){
+      link.classList.toggle('active', link.getAttribute('data-panel-link') === panelName);
+    });
+    window.scrollTo({ top: 0, left: 0 });
+  }
+
+  function closeMobileSidebar(){
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  // Initial activation
+  activatePanel(panelForHash(location.hash));
+
+  // React to hash changes (back/forward buttons, direct links, etc.)
+  window.addEventListener('hashchange', function(){
+    activatePanel(panelForHash(location.hash));
+    closeMobileSidebar();
+  });
+
+  // Close the mobile drawer whenever a sidebar link is tapped
+  sidebarLinks.forEach(function(link){
+    link.addEventListener('click', function(){
+      closeMobileSidebar();
+    });
+  });
+
+  // Hamburger toggle
+  menuToggle.addEventListener('click', function(){
+    var isOpen = sidebar.classList.toggle('open');
+    overlay.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Tapping the dark overlay closes the drawer
+  overlay.addEventListener('click', closeMobileSidebar);
+})();
+</script>
 
 <script>
 (function(){
