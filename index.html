@@ -1075,6 +1075,13 @@ footer strong{color:var(--gold-light)}
         <p style="margin-top:8px">Converts classroom observation notes into a literacy- and numeracy-focused Technical Assistance Plan for Key Stage 1 teachers — every activity classified as Mentoring, Coaching, or Both, aligned with DM-OUHRODI-2026-2055.</p>
         <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('Mentoring and Coaching TA Plan Generator')">Access Master Prompts</button>
       </div>
+      <div class="assess-card">
+        <div class="assess-icon">🧭</div>
+        <h3>Instructional Supervisory Plan Generator</h3>
+        <span class="mp-badge">School Heads Edition · v2.1</span>
+        <p style="margin-top:8px">Analyzes teachers' Individual Development Plans (IDPs) aligned with the PPST and generates a Whole-Year Instructional Supervisory Plan — separates Instructional Supervision from Professional Development activities, with Supervision Capacity Control (max 3–4 teachers/month) for a realistic, implementable plan.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('Instructional Supervisory Plan Generator')">Access Master Prompts</button>
+      </div>
     </div>
     <div class="mp-howto" style="background:var(--navy);margin-top:2rem">
       <div class="mp-howto-label">Paano Gamitin</div>
@@ -1272,7 +1279,8 @@ footer strong{color:var(--gold-light)}
   var MP_LOGGER_URL = "https://script.google.com/macros/s/AKfycbyzRGIpTtnhNQ8kTRQTfN6uPERjyWCNhReAMX0sbIHVZd7EI_BBcsLkDCH3ydQ61JnuDg/exec";
   var MP_DRIVE_URL = "https://drive.google.com/drive/folders/1NhoyHBPpPdlA9SA3H8_vA4WHFgHpjoeh?usp=sharing"; // default folder, used for any resource not listed below
   var MP_DRIVE_URLS = {
-    "Mentoring and Coaching TA Plan Generator": "https://drive.google.com/drive/folders/1Dd8vvYnBKdrq1e9_-XLxCFzGv60aw2kA?usp=sharing"
+    "Mentoring and Coaching TA Plan Generator": "https://drive.google.com/drive/folders/1Dd8vvYnBKdrq1e9_-XLxCFzGv60aw2kA?usp=sharing",
+    "Instructional Supervisory Plan Generator": "files/KABULIG-Master-Prompt-ISP-v2.1.docx"
   };
   var MP_STORAGE_KEY = "kabulig_mp_access_v1";
   var mpPendingResource = "Master Prompts";
@@ -1332,7 +1340,22 @@ footer strong{color:var(--gold-light)}
     try { localStorage.setItem(MP_STORAGE_KEY, JSON.stringify(payload)); } catch(e) {}
 
     window.mpCloseModal();
-    window.open(MP_DRIVE_URLS[mpPendingResource] || MP_DRIVE_URL, "_blank");
+
+    var resourceUrl = MP_DRIVE_URLS[mpPendingResource] || MP_DRIVE_URL;
+
+    // If the resource is a direct file (docx/pdf/etc.), trigger an immediate
+    // download instead of navigating to a Google Drive folder.
+    if (/\.(docx?|pdf|xlsx?|pptx?)$/i.test(resourceUrl)) {
+      var a = document.createElement("a");
+      a.href = resourceUrl;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      window.open(resourceUrl, "_blank");
+    }
+
     return false;
   };
 
