@@ -1091,6 +1091,41 @@ footer strong{color:var(--gold-light)}
         <p style="margin-top:8px">Rates classroom observation notes against the PPST-based COT rubric (Domains 1–5, 21 indicators, Beginning to Distinguished) using strict evidence-based rules — no inferred ratings, no summary-based scoring. <strong>Includes 2 files:</strong> the master prompt (paste into Claude) and the official CO Indicators PDF (attach in Claude alongside the prompt — it's required as reference input).</p>
         <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('Classroom Observation Tool (COT) Rating Generator')">Access Master Prompts</button>
       </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>RMA-Based Intervention Generator (KS1)</h3>
+        <span class="mp-badge">Grades 1–3 · v1.4</span>
+        <p style="margin-top:8px">Paste actual Rapid Mathematics Assessment (RMA) Key Stage 1 results (individual or class summary) and get an evidence-based, tiered intervention plan mapped to specific learning competencies — aligned with RA 12028 (Bawat Bata Bilang Act) and the ARAL Program.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('RMA-Based Intervention Generator (KS1)')">Access Master Prompts</button>
+      </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>RMA-Based Intervention Generator (KS2)</h3>
+        <span class="mp-badge">Grades 4–6 · v1.0</span>
+        <p style="margin-top:8px">Paste actual RMA Key Stage 2 results (individual rows or class/school summary rollups) and get an evidence-based, tiered intervention plan mapped to specific test items and learning competencies across Grades 4–6.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('RMA-Based Intervention Generator (KS2)')">Access Master Prompts</button>
+      </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>RMA-Based Intervention Generator (KS3)</h3>
+        <span class="mp-badge">Grades 7–10 · v1.0</span>
+        <p style="margin-top:8px">Paste actual RMA Key Stage 3 results (individual rows or class/school summary rollups) and get an evidence-based, tiered intervention plan mapped to specific test items and learning competencies across Grades 7–10.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('RMA-Based Intervention Generator (KS3)')">Access Master Prompts</button>
+      </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>Unpacking of Learning Competencies Generator</h3>
+        <span class="mp-badge">All Subjects · v6.0</span>
+        <p style="margin-top:8px">Unpacks Budget of Work (BoW) learning competencies into continuous, session-ready instructional days — complete with K, S, and A objectives, auto-calculated week labels, and difficulty analysis aligned to Bloom's Taxonomy and the MATATAG K–10 Curriculum. Works across all learning areas.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('Unpacking of Learning Competencies Generator')">Access Master Prompts</button>
+      </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>MC Test Generator (KSA Edition)</h3>
+        <span class="mp-badge">DO 003 s. 2026 Compliant · v3.2</span>
+        <p style="margin-top:8px">Turns your Unpacked LC table into a complete test package in two phases: Table of Specifications first (for your review and confirmation), then the print-ready Student Test Form, Answer Key, and the official AI Use Declaration (Annex A, DO 003 s. 2026) — auto-filled and ready to sign.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('MC Test Generator (KSA Edition)')">Access Master Prompts</button>
+      </div>
     </div>
     <div class="mp-howto" style="background:var(--navy);margin-top:2rem">
       <div class="mp-howto-label">Paano Gamitin</div>
@@ -1294,7 +1329,12 @@ footer strong{color:var(--gold-light)}
     "Classroom Observation Tool (COT) Rating Generator": [
       "files/KABULIG-Master-Prompt-Classroom-Observation-v7g.docx",
       "files/CO-Indicators-Reference.pdf"
-    ]
+    ],
+    "RMA-Based Intervention Generator (KS1)": "files/KABULIG-RMA-Master-Prompt-KS1.docx",
+    "RMA-Based Intervention Generator (KS2)": "files/KABULIG-RMA-Master-Prompt-KS2.docx",
+    "RMA-Based Intervention Generator (KS3)": "files/KABULIG-RMA-Master-Prompt-KS3.docx",
+    "Unpacking of Learning Competencies Generator": "files/KABULIG-Master-Prompt-Unpacking-LCs-v6.docx",
+    "MC Test Generator (KSA Edition)": "files/KABULIG-Master-Prompt-MC-Test-Generator-v3.2.docx"
   };
   var MP_STORAGE_KEY = "kabulig_mp_access_v1";
   var mpPendingResource = "Master Prompts";
