@@ -1133,6 +1133,20 @@ footer strong{color:var(--gold-light)}
         <p style="margin-top:8px">Generates a complete 24-part lesson plan following the ILAW Framework (Intentions, Learning Experience, Assessing Learning, Ways Forward) — aligned with DO 016 s.2026 and the MATATAG Curriculum, from learning objectives down to formative assessment and reflection.</p>
         <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('Lesson Plan Generator (ILAW-Aligned)')">Access Master Prompts</button>
       </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>SNED Individualized Education Plan (IEP) Generator</h3>
+        <span class="mp-badge">SNED Edition · v7.0</span>
+        <p style="margin-top:8px">Generates a complete Individualized Education Plan for learners with special needs, following the official SDO Romblon IEP template — with a built-in data privacy gate and grade-level recommendation step before the full IEP is produced. <strong>Includes 2 files:</strong> the master prompt and the Teacher Input Templates (fill these out first, then paste alongside the prompt in Claude). Use learner codes only — never full names, LRN, or contact details.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('SNED Individualized Education Plan (IEP) Generator')">Access Master Prompts</button>
+      </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>SNED Annual Learning Plan (ALP) Lesson Plan Generator</h3>
+        <span class="mp-badge">SNED Edition · v1.1</span>
+        <p style="margin-top:8px">Turns a learner's Annual Learning Plan (ALP) entries — modifications, accommodations, and target competencies — into session-ready lesson plans for SNED and receiving teachers, matched to the learner's functional level and disability profile.</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('SNED Annual Learning Plan (ALP) Lesson Plan Generator')">Access Master Prompts</button>
+      </div>
     </div>
     <div class="mp-howto" style="background:var(--navy);margin-top:2rem">
       <div class="mp-howto-label">Paano Gamitin</div>
@@ -1342,7 +1356,12 @@ footer strong{color:var(--gold-light)}
     "RMA-Based Intervention Generator (KS3)": "files/KABULIG-RMA-Master-Prompt-KS3.docx",
     "Unpacking of Learning Competencies Generator": "files/KABULIG-Master-Prompt-Unpacking-LCs-v6.docx",
     "MC Test Generator (KSA Edition)": "files/KABULIG-Master-Prompt-MC-Test-Generator-v3.2.docx",
-    "Lesson Plan Generator (ILAW-Aligned)": "files/KABULIG-Master-Prompt-Lesson-Plan-v4.docx"
+    "Lesson Plan Generator (ILAW-Aligned)": "files/KABULIG-Master-Prompt-Lesson-Plan-v4.docx",
+    "SNED Individualized Education Plan (IEP) Generator": [
+      "files/KABULIG-Master-Prompt-SNED-IEP-v7.docx",
+      "files/KABULIG-SNED-IEP-Input-Templates.docx"
+    ],
+    "SNED Annual Learning Plan (ALP) Lesson Plan Generator": "files/KABULIG-Master-Prompt-SNED-ALP-LessonPlan-v1.docx"
   };
   var MP_STORAGE_KEY = "kabulig_mp_access_v1";
   var mpPendingResource = "Master Prompts";
