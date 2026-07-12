@@ -79,10 +79,14 @@ footer{margin-left:var(--sidebar-w)}
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .hero-mascot-wrap{display:flex;align-items:center;justify-content:center;gap:clamp(24px,5vw,64px);max-width:1100px;margin:0 auto;flex-wrap:wrap-reverse;text-align:left}
 .hero-mascot-wrap .hero-text{flex:1 1 420px;text-align:center}
-.hero-mascot-wrap .hero-mascot{flex:0 1 260px;display:flex;justify-content:center}
-.hero-mascot-wrap .hero-mascot img{width:100%;max-width:260px;height:auto;animation:mascotFloat 3.2s ease-in-out infinite}
+.hero-mascot-wrap .hero-mascot{flex:0 1 260px;display:flex;justify-content:center;position:relative}
+.hero-mascot-wrap .hero-mascot img{width:100%;max-width:260px;height:auto;animation:mascotFloat 3.2s ease-in-out infinite;position:relative;z-index:1}
 @keyframes mascotFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
-@media(max-width:680px){.hero-mascot-wrap .hero-mascot img{max-width:170px}}
+.speech-bubble{position:absolute;top:-8px;left:50%;transform:translate(-58%,-100%);background:var(--white);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;line-height:1.4;padding:14px 18px;border-radius:18px;max-width:230px;width:max-content;box-shadow:0 8px 24px rgba(0,0,0,0.25);z-index:2;animation:bubblePop 0.4s ease-out 0.3s both,bubbleFloat 3.2s ease-in-out 0.7s infinite}
+.speech-bubble::after{content:"";position:absolute;bottom:-14px;left:62%;width:0;height:0;border-left:10px solid transparent;border-right:4px solid transparent;border-top:16px solid var(--white)}
+@keyframes bubblePop{0%{opacity:0;transform:translate(-58%,-85%) scale(0.7)}100%{opacity:1;transform:translate(-58%,-100%) scale(1)}}
+@keyframes bubbleFloat{0%,100%{margin-top:0}50%{margin-top:-12px}}
+@media(max-width:680px){.hero-mascot-wrap .hero-mascot img{max-width:170px}.speech-bubble{font-size:12.5px;max-width:190px;padding:10px 14px;transform:translate(-52%,-100%)}.speech-bubble::after{left:56%}}
 .btn-gold{background:var(--gold);color:var(--navy-dark);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s}
 .btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
 .btn-outline{background:transparent;color:var(--white);font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;padding:11px 28px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.3);cursor:pointer;transition:border-color 0.2s,color 0.2s,transform 0.15s}
@@ -267,6 +271,7 @@ footer strong{color:var(--gold-light)}
       </div>
     </div>
     <div class="hero-mascot">
+      <div class="speech-bubble">Hi! I am KABULIG developed by Sir Dyon. How can I help you?</div>
       <img src="images/kabulig-mascot.png" alt="KABULIG the mascot waving hello" loading="eager">
     </div>
   </div>
