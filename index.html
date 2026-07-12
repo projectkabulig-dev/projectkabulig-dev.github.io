@@ -113,6 +113,7 @@ footer{margin-left:var(--sidebar-w)}
 .tool-card{background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.5rem;cursor:default;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;display:flex;flex-direction:column}
 .tool-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(11,31,75,0.12);border-color:var(--gold)}
 .tool-icon{font-size:28px;margin-bottom:1rem;transition:transform 0.2s;display:inline-block}
+.tool-icon img{width:40px;height:40px;object-fit:contain;display:block;border-radius:50%}
 .tool-card:hover .tool-icon{transform:scale(1.2)}
 .tool-card h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
 .tool-card p{font-size:13px;color:var(--text-muted);line-height:1.6;flex:1}
@@ -353,13 +354,13 @@ footer strong{color:var(--gold-light)}
     <div class="section-sub">Browser-based tools - no installation needed. Works on any device.</div>
     <div class="tools-grid">
       <div class="tool-card">
-        <div class="tool-icon">🔢</div>
+        <div class="tool-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Bawat Bata Bumibilang (BBB)</h3>
         <p>16-session numeracy intervention app for Grade 1-3 struggling learners under the ARAL Program.</p>
         <span class="tag tag-dev">In Development</span>
       </div>
       <div class="tool-card">
-        <div class="tool-icon">📖</div>
+        <div class="tool-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Reading App</h3>
         <p>Interactive read-aloud tool supporting literacy integration in mathematics classrooms. Available in two versions.</p>
         <span class="tag tag-live">Live</span>
@@ -369,25 +370,25 @@ footer strong{color:var(--gold-light)}
         </div>
       </div>
       <div class="tool-card">
-        <div class="tool-icon">🛒</div>
+        <div class="tool-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Tindahan ni Lola</h3>
         <p>Virtual store math game teaching money concepts and basic operations in a Filipino context.</p>
         <span class="tag tag-live">Live</span>
       </div>
       <div class="tool-card">
-        <div class="tool-icon">🧮</div>
+        <div class="tool-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Algebra Tiles Lab</h3>
         <p>Digital manipulatives for algebra - visualizing equations and polynomial operations.</p>
         <span class="tag tag-live">Live</span>
       </div>
       <div class="tool-card">
-        <div class="tool-icon">📐</div>
+        <div class="tool-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>FractionLab</h3>
         <p>Interactive fraction model builder for elementary and junior high school learners.</p>
         <span class="tag tag-live">Live</span>
       </div>
       <div class="tool-card">
-        <div class="tool-icon">🌾</div>
+        <div class="tool-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Bukid ng Pagpaparami (Area Model)</h3>
         <p>Interactive area model multiplication tool with Concrete-Representational-Abstract modes, built for Grade 3 and up.</p>
         <span class="tag tag-live">Live</span>
@@ -396,7 +397,7 @@ footer strong{color:var(--gold-light)}
         </div>
       </div>
       <div class="tool-card">
-        <div class="tool-icon">🧮</div>
+        <div class="tool-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Factor Lab</h3>
         <p>Eight interactive machines that turn tricky polynomials into easy, step-by-step factoring wins - built for Grade 8-10 Math learners.</p>
         <span class="tag tag-live">Live</span>
@@ -862,13 +863,13 @@ footer strong{color:var(--gold-light)}
     <div class="section-sub">Division-level and nationwide assessment tools to track learner numeracy performance across all key stages.</div>
     <div class="assess-grid">
       <div class="assess-card">
-        <div class="assess-icon">📊</div>
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Rapid Mathematics Assessment (RMA)</h3>
         <p>A <strong>DepEd Central Office nationwide</strong> numeracy assessment tool covering Key Stages 1, 2, and 3. Designed to measure learner performance and guide targeted intervention across all schools in the Philippines.</p>
         <a href="https://tinyurl.com/4e83yv6j" class="assess-btn">Open RMA Tool</a>
       </div>
       <div class="assess-card">
-        <div class="assess-icon">🏝️</div>
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
         <h3>Division Unified Numeracy Test (DUNT)</h3>
         <p>Romblon's division-wide numeracy assessment system powered by <strong>Isla Numerika</strong> - a gamified platform with Google Sheets backend for real-time monitoring across 13 island districts.</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
@@ -1083,6 +1084,13 @@ footer strong{color:var(--gold-light)}
         <p style="margin-top:8px">Analyzes teachers' Individual Development Plans (IDPs) aligned with the PPST and generates a Whole-Year Instructional Supervisory Plan — separates Instructional Supervision from Professional Development activities, with Supervision Capacity Control (max 3–4 teachers/month) for a realistic, implementable plan.</p>
         <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('Instructional Supervisory Plan Generator')">Access Master Prompts</button>
       </div>
+      <div class="assess-card">
+        <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+        <h3>Classroom Observation Tool (COT) Rating Generator</h3>
+        <span class="mp-badge">PPST-Aligned · v7g</span>
+        <p style="margin-top:8px">Rates classroom observation notes against the PPST-based COT rubric (Domains 1–5, 21 indicators, Beginning to Distinguished) using strict evidence-based rules — no inferred ratings, no summary-based scoring. <strong>Includes 2 files:</strong> the master prompt (paste into Claude) and the official CO Indicators PDF (attach in Claude alongside the prompt — it's required as reference input).</p>
+        <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('Classroom Observation Tool (COT) Rating Generator')">Access Master Prompts</button>
+      </div>
     </div>
     <div class="mp-howto" style="background:var(--navy);margin-top:2rem">
       <div class="mp-howto-label">Paano Gamitin</div>
@@ -1093,6 +1101,7 @@ footer strong{color:var(--gold-light)}
         <li>Punan ang Input Block sa ibaba ng prompt (Grade Level, Learning Area, Term No., Week No., Learning Competency, atbp.) tapos i-send.</li>
         <li>Sagutin ang mga tanong ni Claude kung meron, tapos i-download ang resultang file.</li>
       </ol>
+      <p style="margin-top:12px;font-size:12.5px;color:rgba(255,255,255,0.55)">📎 Note: May ilang Master Prompt na may kasamang dagdag na reference file (hal. CO Indicators PDF) — kapag na-download, i-attach din ito sa Claude.ai kasabay ng pag-paste ng master prompt, hindi lang basta i-open.</p>
     </div>
     <p style="text-align:center;margin-top:1.5rem;font-size:12px;color:var(--text-muted)">All master prompts are AI-Assisted, not AI-Generated. Compliant with DepEd Order No. 016, s. 2026 and DepEd Order 003, s. 2026.</p>
   </div>
@@ -1281,7 +1290,11 @@ footer strong{color:var(--gold-light)}
   var MP_DRIVE_URL = "https://drive.google.com/drive/folders/1NhoyHBPpPdlA9SA3H8_vA4WHFgHpjoeh?usp=sharing"; // default folder, used for any resource not listed below
   var MP_DRIVE_URLS = {
     "Mentoring and Coaching TA Plan Generator": "https://drive.google.com/drive/folders/1Dd8vvYnBKdrq1e9_-XLxCFzGv60aw2kA?usp=sharing",
-    "Instructional Supervisory Plan Generator": "files/KABULIG-Master-Prompt-ISP-v2.1.docx"
+    "Instructional Supervisory Plan Generator": "files/KABULIG-Master-Prompt-ISP-v2.1.docx",
+    "Classroom Observation Tool (COT) Rating Generator": [
+      "files/KABULIG-Master-Prompt-Classroom-Observation-v7g.docx",
+      "files/CO-Indicators-Reference.pdf"
+    ]
   };
   var MP_STORAGE_KEY = "kabulig_mp_access_v1";
   var mpPendingResource = "Master Prompts";
@@ -1343,19 +1356,26 @@ footer strong{color:var(--gold-light)}
     window.mpCloseModal();
 
     var resourceUrl = MP_DRIVE_URLS[mpPendingResource] || MP_DRIVE_URL;
+    var urls = Array.isArray(resourceUrl) ? resourceUrl : [resourceUrl];
 
-    // If the resource is a direct file (docx/pdf/etc.), trigger an immediate
-    // download instead of navigating to a Google Drive folder.
-    if (/\.(docx?|pdf|xlsx?|pptx?)$/i.test(resourceUrl)) {
-      var a = document.createElement("a");
-      a.href = resourceUrl;
-      a.download = "";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } else {
-      window.open(resourceUrl, "_blank");
+    function triggerDownload(url){
+      if (/\.(docx?|pdf|xlsx?|pptx?)$/i.test(url)) {
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        window.open(url, "_blank");
+      }
     }
+
+    // Multiple files (e.g. a master prompt + its required reference PDF) download
+    // one after another with a short delay so browsers don't block them.
+    urls.forEach(function(url, i){
+      setTimeout(function(){ triggerDownload(url); }, i * 600);
+    });
 
     return false;
   };
