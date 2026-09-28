@@ -237,6 +237,10 @@ footer strong{color:var(--gold-light)}
 .kb-list li{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--card-border);font-size:13.5px}
 .kb-list button{border:0;background:none;font-weight:800;cursor:pointer;color:#B3261E}
 .kb-list button.ok{color:#1C7A3E}
+.kb-list button.ed{color:var(--navy)}
+.kb-acts{display:flex;gap:12px;flex:none}
+.kb-form.editing{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-pale)}
+.kb-cancel{background:none;border:0;color:var(--text-muted);font:700 13px 'Nunito',sans-serif;cursor:pointer;text-decoration:underline;justify-self:start}
 .kb-list a{color:var(--navy);font-weight:700}
 .kb-post{background:var(--white);border:1.5px solid var(--card-border);border-radius:16px;overflow:hidden;margin-top:2rem}
 .kb-post-head{background:var(--navy);padding:1.75rem 2rem 1.25rem}
@@ -1383,6 +1387,7 @@ footer strong{color:var(--gold-light)}
           <label>Petsa<input name="date" type="date" required></label>
           <label>Nilalaman<textarea name="body" required style="min-height:160px"></textarea></label>
           <button class="btn-gold" type="submit" style="justify-self:start">I-publish</button>
+          <button class="kb-cancel" type="button" data-cancel="kbPostForm" hidden>Kanselahin ang pag-edit</button>
         </form>
         <form class="kb-form" id="kbToolForm">
           <h3>Magdagdag ng tool sa Digital Suite</h3>
@@ -1392,12 +1397,16 @@ footer strong{color:var(--gold-light)}
           <label>Link (https://...)<input name="url" maxlength="499"></label>
           <label>Larawan (hal. images/app.png)<input name="img" maxlength="299"></label>
           <button class="btn-gold" type="submit" style="justify-self:start">I-save ang tool</button>
+          <button class="kb-cancel" type="button" data-cancel="kbToolForm" hidden>Kanselahin ang pag-edit</button>
         </form>
       </div>
       <p class="kb-msg" id="kbAdminMsg" role="status" style="margin-top:1rem"></p>
       <div class="kb-two">
         <div><h3 class="kb-h">Materyales na naghihintay ng approval</h3><ul class="kb-list" id="kbPending"><li>Wala.</li></ul></div>
         <div><h3 class="kb-h">Pinakabagong feedback</h3><ul class="kb-list" id="kbFbList"><li>Wala pa.</li></ul></div>
+      </div>
+      <div class="kb-two">
+        <div style="grid-column:1/-1"><h3 class="kb-h">Mga naaprubahang materyales</h3><ul class="kb-list" id="kbApprovedList"><li>Wala pa.</li></ul></div>
       </div>
       <div class="kb-two">
         <div><h3 class="kb-h">Mga blog post</h3><ul class="kb-list" id="kbPostList"></ul></div>
@@ -1534,7 +1543,7 @@ footer strong{color:var(--gold-light)}
   var MP_DRIVE_URL = "https://drive.google.com/drive/folders/1NhoyHBPpPdlA9SA3H8_vA4WHFgHpjoeh?usp=sharing"; // default folder, used for any resource not listed below
   var MP_DRIVE_URLS = {
     "Mentoring and Coaching TA Plan Generator": "https://drive.google.com/drive/folders/1Dd8vvYnBKdrq1e9_-XLxCFzGv60aw2kA?usp=sharing",
-    "ARAL Math Activity Sheet Master Prompt": "aral-math-prompt.html",
+    "ARAL Math Activity Sheet Master Prompt": "files/aral-math-prompt.html",
     "Instructional Supervisory Plan Generator": "files/KABULIG-Master-Prompt-ISP-v2.1.docx",
     "Classroom Observation Tool (COT) Rating Generator": [
       "files/KABULIG-Master-Prompt-Classroom-Observation-v7g.docx",
@@ -1682,7 +1691,7 @@ function renderBlog(){
       <div class="kb-post-body">${esc(p.body)}</div>
     </article>`).join("");
   const ul = $("#kbPostList"); if (ul) ul.innerHTML = data.posts.map(p =>
-    `<li><span>${esc(p.title)}</span><button data-del="${esc(p.id)}" data-col="announcements">Burahin</button></li>`).join("") || "<li>Wala pa.</li>";
+    `<li><span>${esc(p.title)}</span><span class="kb-acts"><button class="ed" data-edit="${esc(p.id)}" data-col="announcements">I-edit</button><button data-del="${esc(p.id)}" data-col="announcements">Burahin</button></span></li>`).join("") || "<li>Wala pa.</li>";
 }
 
 /* ---------- Digital Suite additions ---------- */
@@ -1697,7 +1706,7 @@ function renderTools(){
         ${url ? `<a class="tool-btn tool-btn-navy" href="${esc(url)}" target="_blank" rel="noopener">Buksan</a>` : ""}
       </div></div>`; }).join("");
   const ul = $("#kbToolList"); if (ul) ul.innerHTML = data.tools.map(t =>
-    `<li><span>${esc(t.name)}</span><button data-del="${esc(t.id)}" data-col="tools">Burahin</button></li>`).join("") || "<li>Wala pa.</li>";
+    `<li><span>${esc(t.name)}</span><span class="kb-acts"><button class="ed" data-edit="${esc(t.id)}" data-col="tools">I-edit</button><button data-del="${esc(t.id)}" data-col="tools">Burahin</button></span></li>`).join("") || "<li>Wala pa.</li>";
 }
 
 /* ---------- Materyales ---------- */
@@ -1724,6 +1733,9 @@ function renderMats(){
       ${url ? `<div style="margin-top:12px"><a class="tool-btn tool-btn-gold" href="${esc(url)}" target="_blank" rel="noopener">Buksan ang file</a></div>` : ""}
     </div>`; }).join("")
     : `<div class="kb-empty">${data.mats.length ? "Walang tugmang materyales." : "Wala pang naaprubahang materyales. Maging una sa pagbabahagi!"}</div>`;
+  const ul = $("#kbApprovedList"); if (ul) ul.innerHTML = data.mats.map(m => { const url = driveUrl(m.url);
+    return `<li><span><strong>${esc(m.title)}</strong><br>${esc(m.uploader)}, ${esc(m.school)}${url?` · <a href="${esc(url)}" target="_blank" rel="noopener">Tingnan</a>`:""}</span>
+      <button data-rm="${esc(m.id)}" data-fid="${esc(m.fileId)}">Burahin</button></li>`; }).join("") || "<li>Wala pa.</li>";
 }
 document.querySelectorAll("[data-m]").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll("[data-m]").forEach(x => x.setAttribute("aria-pressed","false"));
@@ -1791,7 +1803,7 @@ async function startAdmin(){
     $("#kbFbList").innerHTML = s.docs.map(d => { const x = d.data();
       return `<li><span><strong>${esc(x.name)}</strong> (${esc(x.school)}): ${esc(x.message)}</span></li>`; }).join("") || "<li>Wala pa.</li>";
   } catch(err){ $("#kbFbList").innerHTML = `<li>Hindi mabasa: ${esc(err.message)}</li>`; }
-  renderBlog(); renderTools();
+  renderBlog(); renderTools(); renderMats();
 }
 
 $("#kbPending").addEventListener("click", async e => {
@@ -1824,20 +1836,61 @@ $("#kbToolsClear").addEventListener("click", async () => {
   catch(err){ adminMsg("Hindi nabura: " + err.message, false); }
 });
 
+/* Edit mode helpers */
+const FORMS = {announcements:"#kbPostForm", tools:"#kbToolForm"};
+const SUBMIT_LABEL = {kbPostForm:["I-publish","I-save ang pagbabago"], kbToolForm:["I-save ang tool","I-save ang pagbabago"]};
+function setEditing(f, id){
+  if (id) f.dataset.editId = id; else delete f.dataset.editId;
+  f.classList.toggle("editing", !!id);
+  f.querySelector('[type="submit"]').textContent = SUBMIT_LABEL[f.id][id ? 1 : 0];
+  f.querySelector("[data-cancel]").hidden = !id;
+  if (!id) f.reset();
+}
+async function saveDoc(col, f, payload, okMsg){
+  const id = f.dataset.editId;
+  if (id) await fb.fs.updateDoc(fb.fs.doc(fb.db, col, id), payload);
+  else await fb.fs.addDoc(fb.fs.collection(fb.db, col), payload);
+  setEditing(f, null); adminMsg(id ? "Na-save ang pagbabago." : okMsg);
+}
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-cancel]"); if (c) { setEditing($("#" + c.dataset.cancel), null); return; }
+  const b = e.target.closest("[data-edit][data-col]"); if (!b) return;
+  const col = b.dataset.col, f = $(FORMS[col]);
+  const item = (col === "tools" ? data.tools : data.posts).find(x => x.id === b.dataset.edit); if (!item) return;
+  if (col === "tools") { f.name.value = item.name||""; f.desc.value = item.desc||""; f.tag.value = item.tag||""; f.url.value = item.url||""; f.img.value = item.img||""; }
+  else { f.title.value = item.title||""; f.category.value = item.category||""; f.date.value = item.date||""; f.body.value = item.body||""; }
+  setEditing(f, item.id); f.scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+/* Burahin ang naaprubahang materyales (file sa Drive + record) */
+$("#kbApprovedList").addEventListener("click", async e => {
+  const b = e.target.closest("[data-rm]"); if (!b) return;
+  if (!confirm("Burahin ang materyales na ito sa website at sa Drive?")) return;
+  const key = adminKey(); if (!key) return;
+  b.disabled = true;
+  try {
+    await callScript({action:"remove", fileId:b.dataset.fid, key});
+    await fb.fs.deleteDoc(fb.fs.doc(fb.db,"materials",b.dataset.rm));
+    adminMsg("Nabura ang materyales.");
+  } catch(err){
+    if (/admin key/i.test(err.message)) try { sessionStorage.removeItem("kabulig-key"); } catch(x){}
+    adminMsg("Hindi nabura: " + err.message, false); b.disabled = false;
+  }
+});
+
 $("#kbPostForm").addEventListener("submit", async e => {
   e.preventDefault(); const f = e.target;
-  try { await fb.fs.addDoc(fb.fs.collection(fb.db,"announcements"), {title:f.title.value.trim(), category:f.category.value.trim(),
-      date:f.date.value, body:f.body.value.trim(), author:"Rogelio B. Candido Jr., EPS I - Mathematics"});
-    f.reset(); adminMsg("Na-publish sa Blog."); }
-  catch(err){ adminMsg("Hindi na-publish: " + err.message, false); }
+  try { await saveDoc("announcements", f, {title:f.title.value.trim(), category:f.category.value.trim(),
+      date:f.date.value, body:f.body.value.trim(), author:"Rogelio B. Candido Jr., EPS I - Mathematics"}, "Na-publish sa Blog."); }
+  catch(err){ adminMsg("Hindi na-save: " + err.message, false); }
 });
 $("#kbToolForm").addEventListener("submit", async e => {
   e.preventDefault(); const f = e.target, url = f.url.value.trim(), img = f.img.value.trim();
   if (url && !safeUrl(url)) return adminMsg("Ang link ay dapat magsimula sa https://", false);
   if (img && !safeImg(img)) return adminMsg("Hindi tanggap ang larawan. Gamitin ang images/pangalan.png o https://...", false);
-  try { await fb.fs.addDoc(fb.fs.collection(fb.db,"tools"), {name:f.name.value.trim(), desc:f.desc.value.trim(),
-      tag:f.tag.value.trim(), url, img, order:Date.now()});
-    f.reset(); adminMsg("Naidagdag sa Digital Suite."); }
+  const payload = {name:f.name.value.trim(), desc:f.desc.value.trim(), tag:f.tag.value.trim(), url, img};
+  if (!f.dataset.editId) payload.order = Date.now();
+  try { await saveDoc("tools", f, payload, "Naidagdag sa Digital Suite."); }
   catch(err){ adminMsg("Hindi na-save: " + err.message, false); }
 });
 
