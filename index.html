@@ -1249,6 +1249,10 @@ footer strong{color:var(--gold-light)}
         <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenModal('SNED Annual Learning Plan (ALP) Lesson Plan Generator')">Access Master Prompts</button>
       </div>
     </div>
+    <div id="kbPromptsWrap" hidden style="margin-top:2.5rem">
+      <div class="section-label">Bagong Dagdag</div>
+      <div class="numeracy-grid" id="kbPrompts" style="margin-top:1rem"></div>
+    </div>
     <div class="mp-howto" style="background:var(--navy);margin-top:2rem">
       <div class="mp-howto-label">Paano Gamitin</div>
       <ol>
@@ -1302,6 +1306,17 @@ footer strong{color:var(--gold-light)}
       <button type="submit" class="mp-submit">Proceed to Download</button>
       <div class="mp-note">Bubuksan ang Google Drive folder sa bagong tab pagkatapos i-submit.</div>
     </form>
+  </div>
+</div>
+
+<!-- MASTER PROMPT VIEWER (Copy Prompt) MODAL -->
+<div class="mp-overlay" id="pvOverlay">
+  <div class="mp-modal" style="max-width:760px">
+    <button type="button" class="mp-modal-close" onclick="pvClose()" aria-label="Close">&times;</button>
+    <h3 id="pvTitle">Master Prompt</h3>
+    <p class="mp-desc">I-click ang Copy Prompt, tapos i-paste sa <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>.</p>
+    <button type="button" id="pvCopyBtn" class="mp-submit" style="margin-bottom:14px">Copy Prompt</button>
+    <pre id="pvText" style="max-height:50vh;overflow:auto;background:#0d1b33;color:#d9e4ff;padding:16px;border-radius:8px;font-size:12px;line-height:1.55;white-space:pre-wrap;word-break:break-word;font-family:Consolas,Menlo,monospace;margin:0"></pre>
   </div>
 </div>
 
@@ -1400,6 +1415,18 @@ footer strong{color:var(--gold-light)}
           <button class="kb-cancel" type="button" data-cancel="kbToolForm" hidden>Kanselahin ang pag-edit</button>
         </form>
       </div>
+      <div class="kb-two">
+        <form class="kb-form" id="kbPromptForm" style="grid-column:1/-1">
+          <h3>Magdagdag ng Master Prompt</h3>
+          <label>Pangalan<input name="name" required maxlength="99"></label>
+          <label>Badge (hal. v1.2 &middot; Sagip-Layag-Taas Edition)<input name="badge" maxlength="79"></label>
+          <label>Maikling paglalarawan<textarea name="desc" required maxlength="599" style="min-height:80px"></textarea></label>
+          <label>Buong Prompt (ipapakita sa learner/teacher na may Copy button)<textarea name="promptText" style="min-height:180px" placeholder="I-paste dito ang buong master prompt..."></textarea></label>
+          <label>o Link sa file sa halip na copy-paste (https://... .docx/.pdf)<input name="url" maxlength="499" placeholder="https://"></label>
+          <button class="btn-gold" type="submit" style="justify-self:start">I-save ang prompt</button>
+          <button class="kb-cancel" type="button" data-cancel="kbPromptForm" hidden>Kanselahin ang pag-edit</button>
+        </form>
+      </div>
       <p class="kb-msg" id="kbAdminMsg" role="status" style="margin-top:1rem"></p>
       <div class="kb-two">
         <div><h3 class="kb-h">Materyales na naghihintay ng approval</h3><ul class="kb-list" id="kbPending"><li>Wala.</li></ul></div>
@@ -1411,6 +1438,9 @@ footer strong{color:var(--gold-light)}
       <div class="kb-two">
         <div><h3 class="kb-h">Mga blog post</h3><ul class="kb-list" id="kbPostList"></ul></div>
         <div><h3 class="kb-h">Mga dagdag na tool <button type="button" id="kbToolsClear">Burahin lahat</button></h3><ul class="kb-list" id="kbToolList"></ul></div>
+      </div>
+      <div class="kb-two">
+        <div style="grid-column:1/-1"><h3 class="kb-h">Mga master prompt</h3><ul class="kb-list" id="kbPromptList"></ul></div>
       </div>
     </div>
   </div>
@@ -1563,8 +1593,10 @@ footer strong{color:var(--gold-light)}
   };
   var MP_STORAGE_KEY = "kabulig_mp_access_v1";
   var mpPendingResource = "Master Prompts";
+  var mpPendingDynamicId = null;
 
   window.mpOpenModal = function(resourceName){
+    mpPendingDynamicId = null;
     mpPendingResource = resourceName || "Master Prompts";
 
     // Convenience only — prefill the fields from the last submission on this device.
@@ -1582,6 +1614,15 @@ footer strong{color:var(--gold-light)}
 
   window.mpCloseModal = function(){
     document.getElementById("mpOverlay").classList.remove("open");
+  };
+
+  // Opens the same access-gate modal for a DYNAMIC (Firestore) master prompt.
+  // `item` is looked up again at submit time via mpPendingDynamicId, since
+  // renderPrompts() may re-render data.prompts between open and submit.
+  window.mpOpenDynamic = function(id){
+    var item = (window.__kbPromptsData || []).find(function(p){ return p.id === id; });
+    window.mpOpenModal(item ? item.name : "Master Prompt"); // this resets mpPendingDynamicId to null
+    mpPendingDynamicId = id; // so it must be set AFTER mpOpenModal runs
   };
 
   window.mpSubmit = function(evt){
@@ -1620,6 +1661,16 @@ footer strong{color:var(--gold-light)}
 
     window.mpCloseModal();
 
+    if (mpPendingDynamicId) {
+      var dynItem = (window.__kbPromptsData || []).find(function(p){ return p.id === mpPendingDynamicId; });
+      mpPendingDynamicId = null;
+      if (dynItem) {
+        if ((dynItem.promptText || "").trim()) { window.pvOpen(dynItem); return false; }
+        if (dynItem.url) { window.open(dynItem.url, "_blank"); return false; }
+      }
+      return false;
+    }
+
     var resourceUrl = MP_DRIVE_URLS[mpPendingResource] || MP_DRIVE_URL;
     var urls = Array.isArray(resourceUrl) ? resourceUrl : [resourceUrl];
 
@@ -1648,6 +1699,34 @@ footer strong{color:var(--gold-light)}
   // Allow closing the modal by clicking the dark overlay (not the modal card itself)
   document.getElementById("mpOverlay").addEventListener("click", function(evt){
     if (evt.target === this) window.mpCloseModal();
+  });
+
+  // ---------- Master Prompt Viewer (Copy Prompt) for dynamic prompts ----------
+  window.pvOpen = function(item){
+    document.getElementById("pvTitle").textContent = item.name || "Master Prompt";
+    document.getElementById("pvText").textContent = item.promptText || "";
+    document.getElementById("pvOverlay").classList.add("open");
+  };
+  window.pvClose = function(){
+    document.getElementById("pvOverlay").classList.remove("open");
+  };
+  document.getElementById("pvOverlay").addEventListener("click", function(evt){
+    if (evt.target === this) window.pvClose();
+  });
+  function pvFallbackCopy(text, cb){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch(e) {}
+    document.body.removeChild(ta); cb();
+  }
+  document.getElementById("pvCopyBtn").addEventListener("click", function(){
+    var text = document.getElementById("pvText").textContent;
+    var btn = this;
+    function done(){ btn.textContent = "Copied!"; setTimeout(function(){ btn.textContent = "Copy Prompt"; }, 1800); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function(){ pvFallbackCopy(text, done); });
+    } else { pvFallbackCopy(text, done); }
   });
 })();
 </script>
@@ -1679,7 +1758,7 @@ const adminMsg = (t, ok=true) => say($("#kbAdminMsg"), t, ok);
 const fmtDate = d => { const x = new Date(d + "T00:00:00"); return isNaN(x) ? esc(d) : x.toLocaleDateString("fil-PH",{year:"numeric",month:"long",day:"numeric"}); };
 
 let fb = null;
-const data = {posts:[], tools:[], mats:[]};
+const data = {posts:[], tools:[], mats:[], prompts:[]};
 const mst = {filter:"all", q:""};
 
 /* ---------- Blog ---------- */
@@ -1707,6 +1786,22 @@ function renderTools(){
       </div></div>`; }).join("");
   const ul = $("#kbToolList"); if (ul) ul.innerHTML = data.tools.map(t =>
     `<li><span>${esc(t.name)}</span><span class="kb-acts"><button class="ed" data-edit="${esc(t.id)}" data-col="tools">I-edit</button><button data-del="${esc(t.id)}" data-col="tools">Burahin</button></span></li>`).join("") || "<li>Wala pa.</li>";
+}
+
+/* ---------- Master Prompts (dynamic) ---------- */
+function renderPrompts(){
+  window.__kbPromptsData = data.prompts;
+  $("#kbPromptsWrap").hidden = !data.prompts.length;
+  $("#kbPrompts").innerHTML = data.prompts.map(p => `
+    <div class="assess-card">
+      <div class="assess-icon"><img src="images/kabulig-mascot-icon.png" alt="KABULIG mascot"></div>
+      <h3>${esc(p.name)}</h3>
+      ${p.badge ? `<span class="mp-badge">${esc(p.badge)}</span>` : ""}
+      <p style="margin-top:8px">${esc(p.desc)}</p>
+      <button type="button" class="assess-btn" style="border:none;cursor:pointer;font-family:'Outfit',sans-serif" onclick="mpOpenDynamic('${esc(p.id)}')">Access Master Prompts</button>
+    </div>`).join("");
+  const ul = $("#kbPromptList"); if (ul) ul.innerHTML = data.prompts.map(p =>
+    `<li><span>${esc(p.name)}</span><span class="kb-acts"><button class="ed" data-edit="${esc(p.id)}" data-col="prompts">I-edit</button><button data-del="${esc(p.id)}" data-col="prompts">Burahin</button></span></li>`).join("") || "<li>Wala pa.</li>";
 }
 
 /* ---------- Materyales ---------- */
@@ -1803,7 +1898,7 @@ async function startAdmin(){
     $("#kbFbList").innerHTML = s.docs.map(d => { const x = d.data();
       return `<li><span><strong>${esc(x.name)}</strong> (${esc(x.school)}): ${esc(x.message)}</span></li>`; }).join("") || "<li>Wala pa.</li>";
   } catch(err){ $("#kbFbList").innerHTML = `<li>Hindi mabasa: ${esc(err.message)}</li>`; }
-  renderBlog(); renderTools(); renderMats();
+  renderBlog(); renderTools(); renderMats(); renderPrompts();
 }
 
 $("#kbPending").addEventListener("click", async e => {
@@ -1837,8 +1932,8 @@ $("#kbToolsClear").addEventListener("click", async () => {
 });
 
 /* Edit mode helpers */
-const FORMS = {announcements:"#kbPostForm", tools:"#kbToolForm"};
-const SUBMIT_LABEL = {kbPostForm:["I-publish","I-save ang pagbabago"], kbToolForm:["I-save ang tool","I-save ang pagbabago"]};
+const FORMS = {announcements:"#kbPostForm", tools:"#kbToolForm", prompts:"#kbPromptForm"};
+const SUBMIT_LABEL = {kbPostForm:["I-publish","I-save ang pagbabago"], kbToolForm:["I-save ang tool","I-save ang pagbabago"], kbPromptForm:["I-save ang prompt","I-save ang pagbabago"]};
 function setEditing(f, id){
   if (id) f.dataset.editId = id; else delete f.dataset.editId;
   f.classList.toggle("editing", !!id);
@@ -1856,8 +1951,10 @@ document.addEventListener("click", e => {
   const c = e.target.closest("[data-cancel]"); if (c) { setEditing($("#" + c.dataset.cancel), null); return; }
   const b = e.target.closest("[data-edit][data-col]"); if (!b) return;
   const col = b.dataset.col, f = $(FORMS[col]);
-  const item = (col === "tools" ? data.tools : data.posts).find(x => x.id === b.dataset.edit); if (!item) return;
+  const list = col === "tools" ? data.tools : col === "prompts" ? data.prompts : data.posts;
+  const item = list.find(x => x.id === b.dataset.edit); if (!item) return;
   if (col === "tools") { f.name.value = item.name||""; f.desc.value = item.desc||""; f.tag.value = item.tag||""; f.url.value = item.url||""; f.img.value = item.img||""; }
+  else if (col === "prompts") { f.name.value = item.name||""; f.badge.value = item.badge||""; f.desc.value = item.desc||""; f.promptText.value = item.promptText||""; f.url.value = item.url||""; }
   else { f.title.value = item.title||""; f.category.value = item.category||""; f.date.value = item.date||""; f.body.value = item.body||""; }
   setEditing(f, item.id); f.scrollIntoView({behavior:"smooth", block:"start"});
 });
@@ -1893,6 +1990,15 @@ $("#kbToolForm").addEventListener("submit", async e => {
   try { await saveDoc("tools", f, payload, "Naidagdag sa Digital Suite."); }
   catch(err){ adminMsg("Hindi na-save: " + err.message, false); }
 });
+$("#kbPromptForm").addEventListener("submit", async e => {
+  e.preventDefault(); const f = e.target, url = f.url.value.trim(), promptText = f.promptText.value.trim();
+  if (url && !safeUrl(url)) return adminMsg("Ang link ay dapat magsimula sa https://", false);
+  if (!promptText && !url) return adminMsg("Maglagay ng Buong Prompt o Link.", false);
+  const payload = {name:f.name.value.trim(), badge:f.badge.value.trim(), desc:f.desc.value.trim(), promptText, url};
+  if (!f.dataset.editId) payload.order = Date.now();
+  try { await saveDoc("prompts", f, payload, "Naidagdag sa Master Prompts."); }
+  catch(err){ adminMsg("Hindi na-save: " + err.message, false); }
+});
 
 $("#kbLogin").addEventListener("click", async () => {
   if (!fb) return alert("Walang koneksyon sa Firebase.");
@@ -1914,6 +2020,8 @@ $("#kbLogin").addEventListener("click", async () => {
       data.tools = s.docs.map(d => ({id:d.id, ...d.data()})); renderTools(); });
     fs.onSnapshot(fs.query(fs.collection(fb.db,"materials"), fs.where("status","==","approved")), s => {
       data.mats = s.docs.map(d => ({id:d.id, ...d.data()})).sort((x,y) => (y.createdAt?.seconds||0) - (x.createdAt?.seconds||0)); renderMats(); });
+    fs.onSnapshot(fs.query(fs.collection(fb.db,"prompts"), fs.orderBy("order")), s => {
+      data.prompts = s.docs.map(d => ({id:d.id, ...d.data()})); renderPrompts(); });
     au.onAuthStateChanged(fb.auth, user => {
       const ok = !!user && ADMIN_EMAILS.includes(user.email);
       $("#kbAdminLink").hidden = !ok; $("#kbAdminBody").hidden = !ok;
