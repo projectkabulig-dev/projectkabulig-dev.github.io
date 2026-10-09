@@ -251,6 +251,12 @@ footer strong{color:var(--gold-light)}
 .kb-date{color:rgba(255,255,255,0.45);font-size:12px;margin-left:8px}
 .kb-h{font-family:'Outfit',sans-serif;font-size:16px;color:var(--navy);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
 .kb-h button{border:0;background:none;color:#B3261E;font:800 12px 'Nunito',sans-serif;cursor:pointer}
+.kb-pagecard{background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s}
+.kb-pagecard:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(11,31,75,0.12);border-color:var(--gold)}
+.kb-pagebtn{display:inline-block;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none}
+.kb-pagebtn:hover{background:var(--navy-light)}
+.kb-rule{font-size:13px;color:var(--text-muted);background:var(--bg-light);border:1px dashed var(--card-border);border-radius:8px;padding:10px 12px}
+.kb-rule pre{white-space:pre-wrap;font-size:12px;margin:8px 0 0;color:var(--navy)}
 #kbAdminLink[hidden],#kbToolsWrap[hidden]{display:none!important}
 .kb-linkbtn{background:none;border:0;color:rgba(255,255,255,0.6);text-decoration:underline;cursor:pointer;font:inherit;opacity:.8;margin-top:10px}
 </style>
@@ -288,7 +294,6 @@ footer strong{color:var(--gold-light)}
     <a href="#assessment" data-panel-link="assessment"><span class="sb-icon">📊</span>Mathematics Assessment</a>
     <a href="#online-assessment" data-panel-link="assessment-tool"><span class="sb-icon">📝</span>KABULIG Assessment Tool</a>
     <a href="#instructional-supervision" data-panel-link="instructional-supervision"><span class="sb-icon">🧮</span>Instructional Supervision</a>
-    <a href="#pept-guide" data-panel-link="pept-guide"><span class="sb-icon">🎓</span>PEPT Registration Guide</a>
     <a href="#lrms" data-panel-link="lrms"><span class="sb-icon">📚</span>Division LRMS</a>
     <a href="#memos" data-panel-link="memos"><span class="sb-icon">📋</span>Division Memoranda</a>
     <a href="#master-prompts" data-panel-link="master-prompts"><span class="sb-icon">🤖</span>KABULIG Master Prompts</a>
@@ -1114,25 +1119,6 @@ footer strong{color:var(--gold-light)}
   </div>
 </section>
 
-<!-- PEPT REGISTRATION GUIDE -->
-<section id="pept-guide" data-panel="pept-guide" style="background:var(--bg-light);padding:4rem 2rem">
-  <div style="max-width:1100px;margin:0 auto">
-    <div class="section-label">PEPT Registration</div>
-    <div class="section-title">PEPT Registration Form Guide</div>
-    <div class="section-sub">A guide for school heads, school testing coordinators, advisers, teachers, and registration officers in preparing the PEPT registration form (Annex B) for the Regular PEPT, November 2026. Answer a short screening and the tool suggests the purpose (Validation, Subject Completion, Placement, or Retake) and the grade level/s based on the guidelines. Then print the filled-out form or save it as PDF. <strong>Guide only:</strong> the Registration Officer or Division Testing Coordinator of the SDO makes the final evaluation. Nothing about the learner is saved.</div>
-    <div style="margin-top:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
-      <div style="background:var(--white);border:1.5px solid var(--card-border);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(11,31,75,0.12)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--card-border)'">
-        <div style="font-size:32px;margin-bottom:1rem">🎓</div>
-        <h3 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px">PEPT Registration Form Guide</h3>
-        <p style="font-size:13px;color:var(--text-muted);line-height:1.6;flex:1">Tick the documents received, enter the learner's details, and get a recommended purpose and grade level/s, the exam plan (items and time), and a print-ready Annex B. An internet connection is required. The tool opens in a new tab.</p>
-        <div style="margin-top:14px">
-          <a href="PASTE_WEB_APP_URL_HERE" target="_blank" rel="noopener" onclick="if(this.getAttribute('href').indexOf('PASTE_')===0){event.preventDefault();alert('The link of this tool is not set yet.');}" style="display:inline-block;background:var(--navy);color:var(--white);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none" onmouseover="this.style.background='var(--navy-light)'" onmouseout="this.style.background='var(--navy)'">Open Tool</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="lrms" data-panel="lrms" style="background:var(--bg-light);padding:4rem 2rem">
   <div style="max-width:1100px;margin:0 auto">
     <div class="section-label">Learning Resources</div>
@@ -1447,6 +1433,31 @@ footer strong{color:var(--gold-light)}
           <button class="kb-cancel" type="button" data-cancel="kbPromptForm" hidden>Kanselahin ang pag-edit</button>
         </form>
       </div>
+      <div class="kb-two">
+        <form class="kb-form" id="kbPageForm" style="grid-column:1/-1">
+          <h3>Magdagdag ng pahina sa sidebar (menu sa kaliwa)</h3>
+          <label>Pangalan sa sidebar<input name="name" required maxlength="40" placeholder="hal. PEPT Registration Guide"></label>
+          <label>Icon (isang emoji)<input name="icon" maxlength="4" placeholder="hal. 🎓"></label>
+          <label>Ilagay pagkatapos ng<select name="pos" id="kbPagePos"><option value="">(Sa dulo ng menu, bago ang Admin Panel)</option></select></label>
+          <label>Pamagat ng pahina<input name="title" required maxlength="120" placeholder="hal. PEPT Registration Form Guide"></label>
+          <label>Paglalarawan sa itaas ng pahina<textarea name="desc" maxlength="700" style="min-height:90px"></textarea></label>
+          <label>Paglalarawan sa card<textarea name="cardDesc" maxlength="400" style="min-height:80px"></textarea></label>
+          <label>Teksto ng pindutan<input name="btn" maxlength="30" placeholder="Open Tool"></label>
+          <label>Link ng tool (https://...)<input name="url" required maxlength="499" placeholder="https://script.google.com/macros/s/.../exec"></label>
+          <label style="grid-template-columns:auto 1fr;align-items:center;font-weight:600"><input name="newTab" type="checkbox" checked style="width:auto"> Buksan sa bagong tab</label>
+          <button class="btn-gold" type="submit" style="justify-self:start">I-save ang pahina</button>
+          <button class="kb-cancel" type="button" data-cancel="kbPageForm" hidden>Kanselahin ang pag-edit</button>
+          <details class="kb-rule"><summary>Kung lumabas ang "Missing or insufficient permissions"</summary>
+            Kailangang payagan ng Firebase ang koleksyong <b>pages</b>. Sa Firebase Console, buksan ang <b>Firestore Database &gt; Rules</b>, idagdag ang block na ito sa loob ng <code>match /databases/{database}/documents</code>, at pindutin ang <b>Publish</b>:
+            <pre>match /pages/{pageId} {
+  allow read: if true;
+  allow write: if request.auth != null
+    &amp;&amp; request.auth.token.email == "rogeliocandido294@gmail.com"
+    &amp;&amp; request.auth.token.email_verified == true;
+}</pre>
+          </details>
+        </form>
+      </div>
       <p class="kb-msg" id="kbAdminMsg" role="status" style="margin-top:1rem"></p>
       <div class="kb-two">
         <div><h3 class="kb-h">Materyales na naghihintay ng approval</h3><ul class="kb-list" id="kbPending"><li>Wala.</li></ul></div>
@@ -1461,6 +1472,9 @@ footer strong{color:var(--gold-light)}
       </div>
       <div class="kb-two">
         <div style="grid-column:1/-1"><h3 class="kb-h">Mga master prompt</h3><ul class="kb-list" id="kbPromptList"></ul></div>
+      </div>
+      <div class="kb-two">
+        <div style="grid-column:1/-1"><h3 class="kb-h">Mga dagdag na pahina sa sidebar</h3><ul class="kb-list" id="kbPageList"><li>Wala pa.</li></ul></div>
       </div>
     </div>
   </div>
@@ -1480,8 +1494,9 @@ footer strong{color:var(--gold-light)}
   var sidebar = document.getElementById('sidebar');
   var overlay = document.getElementById('sidebarOverlay');
   var menuToggle = document.getElementById('menuToggle');
-  var sidebarLinks = document.querySelectorAll('.sidebar-links a');
-  var panelEls = document.querySelectorAll('.main-content > section[data-panel]');
+  /* Read these fresh each time, so that pages added from the Admin Panel also work */
+  function getLinks(){ return document.querySelectorAll('.sidebar-links a'); }
+  function getPanels(){ return document.querySelectorAll('.main-content > section[data-panel]'); }
 
   // Map an anchor id (e.g. "hero", "mathstory") to its panel name (data-panel value)
   function panelForHash(hash){
@@ -1492,15 +1507,17 @@ footer strong{color:var(--gold-light)}
     return 'home';
   }
 
-  function activatePanel(panelName){
-    panelEls.forEach(function(el){
+  function activatePanel(panelName, keepScroll){
+    getPanels().forEach(function(el){
       el.classList.toggle('panel-active', el.getAttribute('data-panel') === panelName);
     });
-    sidebarLinks.forEach(function(link){
+    getLinks().forEach(function(link){
       link.classList.toggle('active', link.getAttribute('data-panel-link') === panelName);
     });
-    window.scrollTo({ top: 0, left: 0 });
+    if (!keepScroll) window.scrollTo({ top: 0, left: 0 });
   }
+  /* Called after pages from the Admin Panel are added or removed */
+  window.kbRefreshPanels = function(){ activatePanel(panelForHash(location.hash), true); };
 
   function closeMobileSidebar(){
     sidebar.classList.remove('open');
@@ -1518,10 +1535,8 @@ footer strong{color:var(--gold-light)}
   });
 
   // Close the mobile drawer whenever a sidebar link is tapped
-  sidebarLinks.forEach(function(link){
-    link.addEventListener('click', function(){
-      closeMobileSidebar();
-    });
+  document.querySelector('.sidebar-links').addEventListener('click', function(e){
+    if (e.target.closest('a')) closeMobileSidebar();
   });
 
   // Hamburger toggle
@@ -1778,7 +1793,7 @@ const adminMsg = (t, ok=true) => say($("#kbAdminMsg"), t, ok);
 const fmtDate = d => { const x = new Date(d + "T00:00:00"); return isNaN(x) ? esc(d) : x.toLocaleDateString("fil-PH",{year:"numeric",month:"long",day:"numeric"}); };
 
 let fb = null;
-const data = {posts:[], tools:[], mats:[], prompts:[]};
+const data = {posts:[], tools:[], mats:[], prompts:[], pages:[]};
 const mst = {filter:"all", q:""};
 
 /* ---------- Blog ---------- */
@@ -1806,6 +1821,52 @@ function renderTools(){
       </div></div>`; }).join("");
   const ul = $("#kbToolList"); if (ul) ul.innerHTML = data.tools.map(t =>
     `<li><span>${esc(t.name)}</span><span class="kb-acts"><button class="ed" data-edit="${esc(t.id)}" data-col="tools">I-edit</button><button data-del="${esc(t.id)}" data-col="tools">Burahin</button></span></li>`).join("") || "<li>Wala pa.</li>";
+}
+
+/* ---------- Pages added from the Admin Panel (sidebar link + panel) ---------- */
+function pageNameOf(a){ const n = a.lastChild; return (n && n.textContent || a.textContent).trim(); }
+function fillPagePositions(){
+  const sel = $("#kbPagePos"); if (!sel) return;
+  const keep = sel.value;
+  sel.innerHTML = '<option value="">(Sa dulo ng menu, bago ang Admin Panel)</option>' +
+    [...document.querySelectorAll(".sidebar-links a[data-panel-link]:not([data-dyn]):not(#kbAdminLink)")]
+      .map(a => `<option value="${esc(a.getAttribute("data-panel-link"))}">${esc(pageNameOf(a))}</option>`).join("");
+  sel.value = keep;
+}
+function renderPages(){
+  document.querySelectorAll(".sidebar-links [data-dyn], #mainContent > section[data-dyn]").forEach(n => n.remove());
+  const nav = $(".sidebar-links"), main = $("#mainContent"), tail = $("#kbAdminLink"), adminSec = $("#admin");
+  const chain = {};
+  data.pages.forEach(p => {
+    const pid = "page-" + String(p.id).replace(/[^\w-]/g, "");
+    const url = safeUrl(p.url), icon = esc(p.icon || "🔗");
+    const a = document.createElement("a");
+    a.href = "#" + pid; a.setAttribute("data-panel-link", pid); a.setAttribute("data-dyn", "1");
+    a.innerHTML = `<span class="sb-icon">${icon}</span>${esc(p.name)}`;
+    const anchor = p.pos ? [...nav.querySelectorAll("a[data-panel-link]")].find(x => x.getAttribute("data-panel-link") === p.pos) : null;
+    if (anchor) { (chain[p.pos] || anchor).after(a); chain[p.pos] = a; }
+    else nav.insertBefore(a, tail);
+    const sec = document.createElement("section");
+    sec.id = pid; sec.setAttribute("data-panel", pid); sec.setAttribute("data-dyn", "1");
+    sec.style.cssText = "background:var(--bg-light);padding:4rem 2rem";
+    sec.innerHTML = `<div style="max-width:1100px;margin:0 auto">
+      <div class="section-label">${esc(p.name)}</div>
+      <div class="section-title">${esc(p.title)}</div>
+      ${p.desc ? `<div class="section-sub">${esc(p.desc)}</div>` : ""}
+      <div style="margin-top:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+        <div class="kb-pagecard">
+          <div style="font-size:32px;margin-bottom:1rem">${icon}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px">${esc(p.title)}</h3>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.6;flex:1">${esc(p.cardDesc || "")}</p>
+          ${url ? `<div style="margin-top:14px"><a class="kb-pagebtn" href="${esc(url)}"${p.newTab === false ? "" : ' target="_blank" rel="noopener"'}>${esc(p.btn || "Buksan")}</a></div>` : ""}
+        </div>
+      </div></div>`;
+    main.insertBefore(sec, adminSec);
+  });
+  const ul = $("#kbPageList");
+  if (ul) ul.innerHTML = data.pages.map(p =>
+    `<li><span>${esc(p.icon || "🔗")} ${esc(p.name)}</span><span class="kb-acts"><button class="ed" data-edit="${esc(p.id)}" data-col="pages">I-edit</button><button data-del="${esc(p.id)}" data-col="pages">Burahin</button></span></li>`).join("") || "<li>Wala pa.</li>";
+  if (window.kbRefreshPanels) window.kbRefreshPanels();
 }
 
 /* ---------- Master Prompts (dynamic) ---------- */
@@ -1952,8 +2013,8 @@ $("#kbToolsClear").addEventListener("click", async () => {
 });
 
 /* Edit mode helpers */
-const FORMS = {announcements:"#kbPostForm", tools:"#kbToolForm", prompts:"#kbPromptForm"};
-const SUBMIT_LABEL = {kbPostForm:["I-publish","I-save ang pagbabago"], kbToolForm:["I-save ang tool","I-save ang pagbabago"], kbPromptForm:["I-save ang prompt","I-save ang pagbabago"]};
+const FORMS = {announcements:"#kbPostForm", tools:"#kbToolForm", prompts:"#kbPromptForm", pages:"#kbPageForm"};
+const SUBMIT_LABEL = {kbPostForm:["I-publish","I-save ang pagbabago"], kbToolForm:["I-save ang tool","I-save ang pagbabago"], kbPromptForm:["I-save ang prompt","I-save ang pagbabago"], kbPageForm:["I-save ang pahina","I-save ang pagbabago"]};
 function setEditing(f, id){
   if (id) f.dataset.editId = id; else delete f.dataset.editId;
   f.classList.toggle("editing", !!id);
@@ -1971,9 +2032,10 @@ document.addEventListener("click", e => {
   const c = e.target.closest("[data-cancel]"); if (c) { setEditing($("#" + c.dataset.cancel), null); return; }
   const b = e.target.closest("[data-edit][data-col]"); if (!b) return;
   const col = b.dataset.col, f = $(FORMS[col]);
-  const list = col === "tools" ? data.tools : col === "prompts" ? data.prompts : data.posts;
+  const list = col === "tools" ? data.tools : col === "prompts" ? data.prompts : col === "pages" ? data.pages : data.posts;
   const item = list.find(x => x.id === b.dataset.edit); if (!item) return;
   if (col === "tools") { f.name.value = item.name||""; f.desc.value = item.desc||""; f.tag.value = item.tag||""; f.url.value = item.url||""; f.img.value = item.img||""; }
+  else if (col === "pages") { const E = f.elements; fillPagePositions(); E.namedItem("name").value = item.name||""; E.namedItem("icon").value = item.icon||""; E.namedItem("pos").value = item.pos||""; E.namedItem("title").value = item.title||""; E.namedItem("desc").value = item.desc||""; E.namedItem("cardDesc").value = item.cardDesc||""; E.namedItem("btn").value = item.btn||""; E.namedItem("url").value = item.url||""; E.namedItem("newTab").checked = item.newTab !== false; }
   else if (col === "prompts") { f.name.value = item.name||""; f.badge.value = item.badge||""; f.desc.value = item.desc||""; f.promptText.value = item.promptText||""; f.url.value = item.url||""; }
   else { f.title.value = item.title||""; f.category.value = item.category||""; f.date.value = item.date||""; f.body.value = item.body||""; }
   setEditing(f, item.id); f.scrollIntoView({behavior:"smooth", block:"start"});
@@ -2020,6 +2082,21 @@ $("#kbPromptForm").addEventListener("submit", async e => {
   catch(err){ adminMsg("Hindi na-save: " + err.message, false); }
 });
 
+$("#kbPageForm").addEventListener("submit", async e => {
+  e.preventDefault(); const f = e.target, E = f.elements, url = E.namedItem("url").value.trim();
+  if (!safeUrl(url)) return adminMsg("Ang link ay dapat magsimula sa https://", false);
+  const payload = {name:E.namedItem("name").value.trim(), icon:E.namedItem("icon").value.trim(), pos:E.namedItem("pos").value,
+    title:E.namedItem("title").value.trim(), desc:E.namedItem("desc").value.trim(), cardDesc:E.namedItem("cardDesc").value.trim(),
+    btn:E.namedItem("btn").value.trim(), url, newTab:E.namedItem("newTab").checked};
+  if (!f.dataset.editId) payload.order = Date.now();
+  try { await saveDoc("pages", f, payload, "Naidagdag sa sidebar."); }
+  catch(err){
+    adminMsg(err.code === "permission-denied"
+      ? "Hindi pinayagan ng Firebase. Idagdag ang rule para sa 'pages' (tingnan ang kahon sa ilalim ng form)."
+      : "Hindi na-save: " + err.message, false);
+  }
+});
+
 $("#kbLogin").addEventListener("click", async () => {
   if (!fb) return alert("Walang koneksyon sa Firebase.");
   if (fb.auth.currentUser) { await fb.au.signOut(fb.auth); location.hash = "#hero"; return; }
@@ -2042,6 +2119,10 @@ $("#kbLogin").addEventListener("click", async () => {
       data.mats = s.docs.map(d => ({id:d.id, ...d.data()})).sort((x,y) => (y.createdAt?.seconds||0) - (x.createdAt?.seconds||0)); renderMats(); });
     fs.onSnapshot(fs.query(fs.collection(fb.db,"prompts"), fs.orderBy("order")), s => {
       data.prompts = s.docs.map(d => ({id:d.id, ...d.data()})); renderPrompts(); });
+    fillPagePositions();
+    fs.onSnapshot(fs.query(fs.collection(fb.db,"pages"), fs.orderBy("order")), s => {
+      data.pages = s.docs.map(d => ({id:d.id, ...d.data()})); renderPages(); },
+      err => console.warn("pages:", err.message));
     au.onAuthStateChanged(fb.auth, user => {
       const ok = !!user && ADMIN_EMAILS.includes(user.email);
       $("#kbAdminLink").hidden = !ok; $("#kbAdminBody").hidden = !ok;
