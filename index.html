@@ -1421,8 +1421,8 @@ footer strong{color:var(--gold-light)}
           <button class="kb-cancel" type="button" data-cancel="kbToolForm" hidden>Kanselahin ang pag-edit</button>
         </form>
       </div>
-      <div class="kb-two">
-        <form class="kb-form" id="kbPromptForm" style="grid-column:1/-1">
+      <div class="kb-two" style="align-items:start">
+        <form class="kb-form" id="kbPromptForm">
           <h3>Magdagdag ng Master Prompt</h3>
           <label>Pangalan<input name="name" required maxlength="99"></label>
           <label>Badge (hal. v1.2 &middot; Sagip-Layag-Taas Edition)<input name="badge" maxlength="79"></label>
@@ -1432,9 +1432,7 @@ footer strong{color:var(--gold-light)}
           <button class="btn-gold" type="submit" style="justify-self:start">I-save ang prompt</button>
           <button class="kb-cancel" type="button" data-cancel="kbPromptForm" hidden>Kanselahin ang pag-edit</button>
         </form>
-      </div>
-      <div class="kb-two">
-        <form class="kb-form" id="kbPageForm" style="grid-column:1/-1">
+        <form class="kb-form" id="kbPageForm">
           <h3>Magdagdag ng pahina sa sidebar (menu sa kaliwa)</h3>
           <label>Pangalan sa sidebar<input name="name" required maxlength="40" placeholder="hal. PEPT Registration Guide"></label>
           <label>Icon (isang emoji)<input name="icon" maxlength="4" placeholder="hal. 🎓"></label>
